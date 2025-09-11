@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Auto
+comment0.text=\n\ Write\ a\ description\ of\ class\ Auto\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=Autofarbe
+comment1.target=void\ setFarbe(java.lang.String)
+comment2.params=Autobaujahr
+comment2.target=void\ setBauJahr(int)
+comment3.params=farbe\ baujahr
+comment3.target=Auto(java.lang.String,\ int)
+comment4.params=baujahr
+comment4.target=int\ alterRechner(int)
+comment5.params=
+comment5.target=void\ AutoAusgabe()
+numComments=6
