@@ -12,8 +12,6 @@ public class Student
     private float cm;
     private int gebjahr;
     private char gender;
-    private int bmi;
-    
     //Die Setter
     public void setName(String name){
         this.name = name;
@@ -31,8 +29,9 @@ public class Student
         this.gender = gender;
     }
     //Student Objekt
-    public Student(String name, float kg, float cm, char gender){
+    public Student(String name, int gebjahr,float kg, float cm, char gender){
         this.setName(name);
+        this.setGebjahr(gebjahr);
         this.setKg(kg);
         this.setCm(cm);
         this.setGender(gender);
