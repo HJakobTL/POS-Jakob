@@ -50,12 +50,15 @@ public class Student
         float ergebnis = (kg / (cm*cm));
         return ergebnis;
     }
-    
+    //Test ob Mann oder Frau
     public String MannOderFrau(char gender){
         if (gender == 'm'){
             return "Männlich";  
         }
-        else return "Weiblich";
+        else if (gender == 'f'){
+            return "Weiblich";
+        }
+        else return "Geben Sie 'm' oder 'f'";
     }
     //BMI Schauen ob unter/über/normalgewicht
     public String bmi_werter(char gender){
