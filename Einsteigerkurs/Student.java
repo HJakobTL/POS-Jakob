@@ -39,46 +39,47 @@ public class Student
     //Print Student Info
     public void printStudent(){
         System.out.println("Name: " + this.name + " (Geb. " + this.gebjahr + ")");
-        System.out.println("BMI: " + bmi_rechner(this.kg, this.cm));
-        System.out.println("Dein Geschlecht: " + MannOderFrau(this.gender));
-        System.out.println("Du bist: " + bmi_werter(this.gender));
+        System.out.println("BMI: " + this.bmi_rechner());
+        System.out.println("Dein Geschlecht: " + this.mannOderFrau());
+        System.out.println("Du bist: " + this.bmi_werter());
     }
     //BMI Rechner
-    public float bmi_rechner(float kg,float cm){
-        cm /= 100;
-        float ergebnis = (kg / (cm*cm));
+    public float bmi_rechner(){
+        float cmInMetern = this.cm / 100.0f;
+        float ergebnis = (this.kg / (cmInMetern*cmInMetern));
         return ergebnis;
     }
     //Test ob Mann oder Frau
-    public String MannOderFrau(char gender){
-        if (gender == 'm'){
+    public String mannOderFrau(){
+        if (this.gender == 'm'){
             return "Männlich";  
         }
-        else if (gender == 'f'){
+        else if (this.gender == 'f'){
             return "Weiblich";
         }
         else return "Geben Sie 'm' oder 'f'";
     }
     //BMI Schauen ob unter/über/normalgewicht
-    public String bmi_werter(char gender){
+    public String bmi_werter(){
         int normal_max_m = 25;
         int normal_min_m = 20;
         int normal_max_f = 24;
         int normal_min_f = 19;
+        float bmi = this.bmi_rechner();
         if (gender == 'm'){
-            if (bmi_rechner(this.kg, this.cm) < normal_min_m){
+            if (bmi < normal_min_m){
                 return "Untergewicht";
             }
-            else if (bmi_rechner(this.kg, this.cm) > normal_max_m){
+            else if (bmi > normal_max_m){
                 return "Übergewicht";
             }
             else return "Normal";
         }
         else if (gender == 'f'){
-            if (bmi_rechner(this.kg, this.cm) < normal_min_f){
+            if (bmi < normal_min_f){
                 return "Untergewicht";
             }
-            else if (bmi_rechner(this.kg, this.cm) > normal_max_f){
+            else if (bmi > normal_max_f){
                 return "Übergewicht";
             }
             else return "Normal";
