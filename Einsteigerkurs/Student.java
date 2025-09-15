@@ -1,7 +1,7 @@
 /**
  * Write a description of class Student here.
  *
- * @author (Jakob Cezawa)
+ * @author (Jakob)
  * @version (8.9.2025)
  */
 public class Student
@@ -89,3 +89,4 @@ public class Student
         else return "Error";
     }
 }
+    
