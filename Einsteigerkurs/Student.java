@@ -39,6 +39,8 @@ public class Student
     //Print Student Info
     public void printStudent(){
         System.out.println("Name: " + this.name + " (Geb. " + this.gebjahr + ")");
+        System.out.println("Gewicht: " + this.kg);
+        System.out.println("Größe: " + this.cm);
         System.out.println("BMI: " + this.bmi_rechner());
         System.out.println("Dein Geschlecht: " + this.mannOderFrau());
         System.out.println("Du bist: " + this.bmi_werter());
