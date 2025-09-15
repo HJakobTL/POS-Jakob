@@ -13,19 +13,19 @@ public class Student
     private int gebjahr;
     private char gender;
     //Die Setter
-    public void setName(String name){
+    private void setName(String name){
         this.name = name;
     }
-    public void setGebjahr(int gebjahr){
+    private void setGebjahr(int gebjahr){
         this.gebjahr = gebjahr;
     }
-    public void setKg(float kilogramm){
+    private void setKg(float kilogramm){
         this.kg = kilogramm;
     }
-    public void setCm(float centimeter){
+    private void setCm(float centimeter){
         this.cm = centimeter;
     }
-    public void setGender(char gender){
+    private void setGender(char gender){
         this.gender = gender;
     }
     //Student Objekt
@@ -46,13 +46,13 @@ public class Student
         System.out.println("Du bist: " + this.bmi_werter());
     }
     //BMI Rechner
-    public float bmi_rechner(){
+    private float bmi_rechner(){
         float cmInMetern = this.cm / 100.0f;
         float ergebnis = (this.kg / (cmInMetern*cmInMetern));
         return ergebnis;
     }
     //Test ob Mann oder Frau
-    public String mannOderFrau(){
+    private String mannOderFrau(){
         if (this.gender == 'm'){
             return "Männlich";  
         }
@@ -62,7 +62,7 @@ public class Student
         else return "Geben Sie 'm' oder 'f'";
     }
     //BMI Schauen ob unter/über/normalgewicht
-    public String bmi_werter(){
+    private String bmi_werter(){
         int normal_max_m = 25;
         int normal_min_m = 20;
         int normal_max_f = 24;
