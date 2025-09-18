@@ -1,8 +1,8 @@
 /**
  * Write a description of class Student here.
  *
- * @author (Jakob)
- * @version (8.9.2025)
+ * @author (Jakob C)
+ * @version (15.9.2025)
  */
 public class Student
 {
@@ -12,20 +12,46 @@ public class Student
     private float cm;
     private int gebjahr;
     private char gender;
+
     //Die Setter
     private void setName(String name){
+        // TODO: Seperate Meldung zu kurz oder zu lang
+        if (name.length() < 3){
+            throw new IllegalArgumentException("Name muss mind. 3 Buchstaben haben");
+        }
+        else if (name.length() > 50){
+            throw new IllegalArgumentException("Name darf max 50 Buchstaben haben");
+        }   
         this.name = name;
     }
+
     private void setGebjahr(int gebjahr){
         this.gebjahr = gebjahr;
     }
+
     private void setKg(float kilogramm){
+        if (kilogramm > 635) {
+            throw new IllegalArgumentException("Mehr als 635kg nicht möglich");
+        } else if (kilogramm < 2) {
+            throw new IllegalArgumentException("Weniger als 2kg nicht möglich");
+        }
         this.kg = kilogramm;
     }
+
     private void setCm(float centimeter){
+        if (centimeter > 250) {
+            throw new IllegalArgumentException("Größer als 250cm ist nicht möglich");
+        } else if (centimeter < 50) {
+            throw new IllegalArgumentException("Kleiner als 54cm ist nicht möglich");
+        }
         this.cm = centimeter;
     }
+
     private void setGender(char gender){
+        gender = Character.toLowerCase(gender);
+        if (gender != 'm' && gender != 'f'){
+            throw new IllegalArgumentException("m oder f eingeben");
+        }
         this.gender = gender;
     }
     //Student Objekt
@@ -59,7 +85,7 @@ public class Student
         else if (this.gender == 'f'){
             return "Weiblich";
         }
-        else return "Geben Sie 'm' oder 'f'";
+        else throw new IllegalArgumentException("Geben Sie 'm' oder 'f' ein");
     }
     //BMI Schauen ob unter/über/normalgewicht
     private String bmi_werter(){
@@ -89,4 +115,4 @@ public class Student
         else return "Error";
     }
 }
-    
+ 
