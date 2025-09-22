@@ -13,6 +13,25 @@ public class Student
     private int gebjahr;
     private char gender;
 
+    //Student Objekt
+    public Student(String name, int gebjahr,float kg, float cm, char gender){
+        this.setName(name);
+        this.setGebjahr(gebjahr);
+        this.setKg(kg);
+        this.setCm(cm);
+        this.setGender(gender);
+    }
+
+    public Student(String name,boolean isMale,float cm, float kg){
+        this.setName(name);
+        this.setKg(kg);
+        this.setCm(cm);
+        if (isMale){
+            this.setGender('m');
+        }
+        else this.setGender('f');
+    }  
+    
     //Die Setter
     private void setName(String name){
         // TODO: Seperate Meldung zu kurz oder zu lang
@@ -54,14 +73,7 @@ public class Student
         }
         this.gender = gender;
     }
-    //Student Objekt
-    public Student(String name, int gebjahr,float kg, float cm, char gender){
-        this.setName(name);
-        this.setGebjahr(gebjahr);
-        this.setKg(kg);
-        this.setCm(cm);
-        this.setGender(gender);
-    }
+
     //Print Student Info
     public void printStudent(){
         System.out.println("Name: " + this.name + " (Geb. " + this.gebjahr + ")");
@@ -88,7 +100,7 @@ public class Student
         else throw new IllegalArgumentException("Geben Sie 'm' oder 'f' ein");
     }
     //BMI Schauen ob unter/über/normalgewicht
-    private String bmi_werter(){
+    public String bmi_werter(){
         int normal_max_m = 25;
         int normal_min_m = 20;
         int normal_max_f = 24;
