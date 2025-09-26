@@ -8,13 +8,13 @@ public class Student
 {
     // Meine Variablen
     private String name;
-    private float kg;
-    private float cm;
+    private double kg;
+    private double cm;
     private int gebjahr;
     private char gender;
 
     //Student Objekt
-    public Student(String name, int gebjahr,float kg, float cm, char gender){
+    public Student(String name, int gebjahr,double kg, double cm, char gender){
         this.setName(name);
         this.setGebjahr(gebjahr);
         this.setKg(kg);
@@ -22,7 +22,7 @@ public class Student
         this.setGender(gender);
     }
 
-    public Student(String name,boolean isMale,float cm, float kg){
+    public Student(String name,boolean isMale,double cm, double kg){
         this.setName(name);
         this.setKg(kg);
         this.setCm(cm);
@@ -48,7 +48,7 @@ public class Student
         this.gebjahr = gebjahr;
     }
 
-    private void setKg(float kilogramm){
+    private void setKg(double kilogramm){
         if (kilogramm > 635) {
             throw new IllegalArgumentException("Mehr als 635kg nicht möglich");
         } else if (kilogramm < 2) {
@@ -57,7 +57,7 @@ public class Student
         this.kg = kilogramm;
     }
 
-    private void setCm(float centimeter){
+    private void setCm(double centimeter){
         if (centimeter > 250) {
             throw new IllegalArgumentException("Größer als 250cm ist nicht möglich");
         } else if (centimeter < 50) {
@@ -84,9 +84,9 @@ public class Student
         System.out.println("Du bist: " + this.bmi_werter());
     }
     //BMI Rechner
-    private float bmi_rechner(){
-        float cmInMetern = this.cm / 100.0f;
-        float ergebnis = (this.kg / (cmInMetern*cmInMetern));
+    public double bmi_rechner(){
+        double cmInMetern = this.cm / 100.0f;
+        double ergebnis = (this.kg / (cmInMetern*cmInMetern));
         return ergebnis;
     }
     //Test ob Mann oder Frau
@@ -105,24 +105,24 @@ public class Student
         int normal_min_m = 20;
         int normal_max_f = 24;
         int normal_min_f = 19;
-        float bmi = this.bmi_rechner();
+        double bmi = this.bmi_rechner();
         if (gender == 'm'){
             if (bmi < normal_min_m){
                 return "Untergewicht";
             }
-            else if (bmi > normal_max_m){
+            if (bmi > normal_max_m){
                 return "Übergewicht";
             }
-            else return "Normal";
+            return "Normal";
         }
-        else if (gender == 'f'){
+        if(gender == 'f'){
             if (bmi < normal_min_f){
                 return "Untergewicht";
             }
-            else if (bmi > normal_max_f){
+            if (bmi > normal_max_f){
                 return "Übergewicht";
             }
-            else return "Normal";
+            return "Normal";
         }
         else return "Error";
     }
