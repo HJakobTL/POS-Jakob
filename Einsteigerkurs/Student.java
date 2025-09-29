@@ -32,6 +32,15 @@ public class Student
         else this.setGender('f');
     }  
     
+    //Die Getter
+    public String getName(){
+        return name;
+    }
+    
+    public double getKg(){
+        return kg;
+    }
+    
     //Die Setter
     private void setName(String name){
         // TODO: Seperate Meldung zu kurz oder zu lang
