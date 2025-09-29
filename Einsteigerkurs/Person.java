@@ -2,12 +2,9 @@
  * Write a description of class Student here.
  *
  * @author (Jakob C)
- * @version (15.9.2025)
- * ---------------------------
- * Wird nicht mehr genutzt!!!
- * ---------------------------
+ * @version (29.09.2025)
  */
-public class Student
+public class Person
 {
     // Meine Variablen
     private String name;
@@ -16,23 +13,15 @@ public class Student
     private int gebjahr;
     private char gender;
 
-    //Student Objekt
-    public Student(){
+    //Person Objekt
+    public Person(){
         this.setName("Test");
         this.setKg(80);
         this.setCm(180);
         this.setGender('m');
     }
     
-    public Student(String name, int gebjahr,double kg, double cm, char gender){
-        this.setName(name);
-        this.setGebjahr(gebjahr);
-        this.setKg(kg);
-        this.setCm(cm);
-        this.setGender(gender);
-    }
-
-    public Student(String name,boolean isMale,double cm, double kg){
+    public Person(String name,boolean isMale,double cm, double kg){
         this.setName(name);
         this.setKg(kg);
         this.setCm(cm);
@@ -93,8 +82,8 @@ public class Student
         this.gender = gender;
     }
 
-    //Print Student Info
-    public void printStudent(){
+    //Print Person Info
+    public void printPerson(){
         System.out.println("Name: " + this.name + " (Geb. " + this.gebjahr + ")");
         System.out.println("Gewicht: " + this.kg);
         System.out.println("Größe: " + this.cm);
