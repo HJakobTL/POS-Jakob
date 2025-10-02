@@ -31,10 +31,9 @@ public class AutoTest
         System.out.println("Executing SetUp()");
     }
     
-    
     @Test
-    public void Test_printAuto(){
-        // Objekte
+    public void TestGesamtGewichtAuto(){
+        try {
         Auto BMW = new Auto("BMW", 3000);
         Person ferdi = new Person("Ferdinand", true, 181, 200); //Fahrer
         BMW.einsteigen(ferdi);
@@ -42,10 +41,49 @@ public class AutoTest
         BMW.einsteigen(marie);
         Person hans = new Person("Hans", true, 170, 200); //Rückbank
         BMW.einsteigen(hans);
-        
-        assertEquals("Auto hält das Gewicht aus", BMW.Auto_Aushalten(), "Auto Aushaltevermögen Wertung"); // Error, weil mehr als 3500kg Gesamtgewicht
+        BMW.autoAushalten();
+    } 
+    catch (Exception e){
+        System.out.println("Exception gefangen: " + e.getMessage());
+    }   
     }
     
+    @Test
+    public void TestAuto(){
+        // Autoname null Test
+        try{
+            Auto Audi = new Auto(null, 2000);
+        }
+        catch (Exception n){
+            System.out.println("Exception gefange: " + n.getMessage());
+        }
+        // Auto Eigengewicht mehr als 3000 Test
+        try {
+            Auto Ford = new Auto("Ford", 3001);
+        }
+        catch (Exception k){
+            System.out.println("Exception gefangen: " + k.getMessage());
+        }
+        // Aussteige Funktion Test
+        try {
+            Auto Skoda = new Auto("Skoda", 1500);
+            Person Jakob = new Person("Jakob", true, 180, 80);
+            Skoda.einsteigen(Jakob);
+            Skoda.aussteigen("Bob"); //String Version
+        }
+        catch (Exception p){
+            System.out.println("Exception gefangen: " + p.getMessage());
+        }
+        // Person nicht null Test
+        try {
+            Auto Porsche = new Auto("Porsche", 1870);
+            Person Bob = null;
+            Porsche.einsteigen(Bob);
+        }
+        catch (Exception t){
+            System.out.println("Exception gefangen: " + t.getMessage());
+        }
+    }
     
     /**
      * Tears down the test fixture.

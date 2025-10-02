@@ -12,7 +12,7 @@ public class Auto
     
     private Person fahrer;
     private Person beifahrer;
-    private Person ruckbank;
+    private Person rueckbank;
     
     // Auto Objekte
     public Auto(){
@@ -26,23 +26,23 @@ public class Auto
     }
     
     // Die Getter
-    private String getName(){
+    public String getName(){
         return name;
     }
     
-    private double getEigengewicht(){
+    public double getEigengewicht(){
         return eigengewicht;
     }
     
     // Die Setter
-    private void setName(String name){
+    public void setName(String name){
         if (name == null){
-            throw new IllegalArgumentException("Name darf nicht null sein");
+            throw new IllegalArgumentException("Autoname darf nicht null sein");
         }
         this.name = name;
     }
     
-    private void setEigengewicht(double eigengewicht){
+    public void setEigengewicht(double eigengewicht){
         if (eigengewicht < 600 || eigengewicht > 3000){
             throw new IllegalArgumentException("Eigengewicht nur zwischen 600 und 3000 möglich");
         }
@@ -62,9 +62,9 @@ public class Auto
             this.beifahrer = person;
             System.out.println(beifahrer.getName() + " ist der Beifahrer");
         }
-        else if (this.ruckbank == null){
-            this.ruckbank = person;
-            System.out.println(ruckbank.getName() + " ist auf der Rückbank");
+        else if (this.rueckbank == null){
+            this.rueckbank = person;
+            System.out.println(rueckbank.getName() + " ist auf der Rückbank");
         }
         else throw new IllegalStateException("Auto ist voll");
     }
@@ -79,8 +79,8 @@ public class Auto
         beifahrer = null;
     }
     private void aussteigenRuckbank(){
-        System.out.println(ruckbank.getName() + " steigt aus");
-        ruckbank = null;
+        System.out.println(rueckbank.getName() + " steigt aus");
+        rueckbank = null;
     }
     
     public void aussteigen(Person person){
@@ -93,7 +93,7 @@ public class Auto
         else if (this.beifahrer == person){
             aussteigenBeifahrer();
         }
-        else if (this.ruckbank == person){
+        else if (this.rueckbank == person){
             aussteigenRuckbank();
         }
         else throw new IllegalArgumentException("Kein Person im Auto oder Person ist nicht im Auto");
@@ -110,14 +110,14 @@ public class Auto
         else if (this.beifahrer != null && name.equals(beifahrer.getName())){
             aussteigenBeifahrer();
         }
-        else if (this.ruckbank != null && name.equals(ruckbank.getName())){
+        else if (this.rueckbank != null && name.equals(rueckbank.getName())){
             aussteigenRuckbank();
         }
-        else throw new IllegalArgumentException("Person mit diesem Namen ist nicht im Auto");
+        else throw new IllegalArgumentException("Person mit diesem Namen (" + name + ") ist nicht im Auto");
     }
     
     // Gesamt Gewicht des Autos ausrechnen
-    private double gesamtGewicht(){
+    public double gesamtGewicht(){
         double gesamtGewicht = getEigengewicht(); 
         if (this.fahrer != null){
             gesamtGewicht += this.fahrer.getKg();
@@ -127,25 +127,19 @@ public class Auto
             gesamtGewicht += this.beifahrer.getKg();
             System.out.println(gesamtGewicht);
         }
-        if (this.ruckbank != null){
-            gesamtGewicht += this.ruckbank.getKg();
+        if (this.rueckbank != null){
+            gesamtGewicht += this.rueckbank.getKg();
             System.out.println(gesamtGewicht);
         }
         return gesamtGewicht;
     }
     
     
-    public String Auto_Aushalten(){
+    public void autoAushalten(){
         if (gesamtGewicht() > 3500){
-            return "Zu viel Gewicht";
+            throw new IllegalArgumentException("Auto hält das nicht aus");
         }
-        if (gesamtGewicht() < getEigengewicht()){
-            throw new IllegalArgumentException("Weniger als das Eigengewicht nicht möglich");
-        }
-        if (gesamtGewicht() <= 3500 || gesamtGewicht() >= getEigengewicht()){
-            return "Auto hält das Gewicht aus";
-        }
-        else throw new IllegalArgumentException("Error");
+        System.out.println("Auto hält das Gewicht aus");
     }
     
     // Print Auto Infos
@@ -155,27 +149,24 @@ public class Auto
         
         System.out.print("Fahrer: ");
         if (this.fahrer == null){
-            throw new IllegalArgumentException("Der Fahrer fehlt!");
+            System.out.println("--frei--");
         }
         else this.fahrer.printPerson();
         System.out.println("---------");
         System.out.println("Beifahrer: ");
         if (this.beifahrer == null){
-            System.out.println("Ist nicht anwesend");
+            System.out.println("--frei--");
         }
-        else if (this.beifahrer != null){
-            this.beifahrer.printPerson();
-        }
+        else this.beifahrer.printPerson();
         System.out.println("---------");
         System.out.println("Ruckbank: ");
-        if (this.ruckbank == null){
-            System.out.println("Ist nicht anwesend");
+        if (this.rueckbank == null){
+            System.out.println("--frei--");
         }
-        else if (this.ruckbank != null){
-            this.ruckbank.printPerson();
-        }
+        else this.rueckbank.printPerson();
         System.out.println("---------");
         System.out.println("Das Gesamtgewicht: " + gesamtGewicht());
+        autoAushalten();
         System.out.println("--------------------------------------------------------");
     }
 }
