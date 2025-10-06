@@ -49,10 +49,28 @@ public class Auto
         this.eigengewicht = eigengewicht;
     }
     
+    // Hilffunktion um zu schauen ob die Person im Auto ist oder nicht
+    public boolean personImAuto(Person person){
+        boolean anwesend = true;
+        if (person == fahrer){
+            return true;
+        }
+        else if (person == beifahrer){
+            return true;
+        }
+        else if (person == rueckbank){
+            return true;
+        }
+        else return false;
+    }
+    
     // Einsteige Funktion
     public void einsteigen(Person person){
         if (person == null){
             throw new IllegalArgumentException("Person kann nicht 'null' sein");
+        }
+        if (personImAuto(person) == true){
+            throw new IllegalArgumentException("Person im Auto");
         }
         if (this.fahrer == null){
             this.fahrer = person;
@@ -87,6 +105,9 @@ public class Auto
         if (person == null){
             throw new IllegalArgumentException("Person kann nicht 'null' sein");
         }
+        if (personImAuto(person) == false){
+            throw new IllegalArgumentException("Person ist nicht im Auto");
+        }
         if (this.fahrer == person){
             aussteigenFahrer();
         }
@@ -96,7 +117,7 @@ public class Auto
         else if (this.rueckbank == person){
             aussteigenRuckbank();
         }
-        else throw new IllegalArgumentException("Kein Person im Auto oder Person ist nicht im Auto");
+        else throw new IllegalArgumentException("Kein Person im Auto");
     }
     
     // Austeige Funktion per Name

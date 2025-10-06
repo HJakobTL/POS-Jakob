@@ -26,6 +26,7 @@ public class AutoTest
      * Called before every test case method.
      */
     @BeforeEach
+    // In setup personen und Autos erstellen 
     public void setUp()
     {
         System.out.println("Executing SetUp()");
@@ -82,6 +83,17 @@ public class AutoTest
         }
         catch (Exception t){
             System.out.println("Exception gefangen: " + t.getMessage());
+        }
+        
+        // 2 gleiche Personen im Auto
+        try {
+            Auto Test = new Auto("Test", 2000);
+            Person Jakob = new Person("Jakob", true, 180, 80);
+            Test.einsteigen(Jakob);
+            Test.einsteigen(Jakob);
+        }
+        catch (Exception z){
+            System.out.println("Exception gefangen: " + z.getMessage());
         }
     }
     
