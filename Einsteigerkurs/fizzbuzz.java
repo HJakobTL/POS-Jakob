@@ -13,8 +13,18 @@ public class fizzbuzz
     /**
      * Constructor for objects of class fizzbuzz
      */
-    public fizzbuzz()
+    public static void lehrerFizzBuzz()
     {
+        for (int i=1;true;i++){
+            String printme = "";
+            if (i%3==0) printme += "Fizz";
+            if (i%5==0) printme += "Buzz";
+            if (i%7==0) printme += "Whizz";
+            if (i%11==0) printme += "Bang";
+            if (printme.isEmpty()) System.out.println(i);
+            else System.out.println(printme);
+            if (printme.equals("FizzBuzzWhizzBang")) break;
+        }
     }
     
     public static void fizzbuzz(){

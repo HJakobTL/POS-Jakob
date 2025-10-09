@@ -10,7 +10,7 @@ public class Holiday
     // instance variables - replace the example below with your own
     String arr[] = {"first", "second", "third"};
     String arr1[] = {"","Two turtle doves and","Three french hens","Four calling birds"};
-    public void normalText(){
+    public void Holiday(){
         for (int i = 0;i<3;i++){
         System.out.println("On the " + arr[i] + " day of Christmas");
         for (int j = 0;j<=i;j++){
@@ -19,9 +19,5 @@ public class Holiday
         System.out.println("My true love sent to me:");
         System.out.println("A partridge in a pear tree.");
     }
-    }
-    
-    public static void Holiday(){
-        
-    }
+    }   
 }
