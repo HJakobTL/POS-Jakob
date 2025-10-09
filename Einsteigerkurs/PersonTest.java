@@ -13,13 +13,12 @@ import org.junit.jupiter.api.Test;
  */
 public class PersonTest
 {
-    /**
-     * Default constructor for test class PersonTest
-     */
-    public PersonTest()
-    {
-    }
-
+    public Person ferdi;
+    public Person mann_unter;
+    public Person mann_normal;
+    public Person frau_uber;
+    public Person frau_unter;
+    public Person frau_normal;
     /**
      * Sets up the test fixture.
      *
@@ -28,26 +27,31 @@ public class PersonTest
     @BeforeEach
     public void setUp()
     {
-        System.out.println("Executing SetUp()");
+        // Männer
+        ferdi = new Person("Ferdinand", true, 181, 100);
+        mann_unter = new Person("MannUnter", true, 200, 65);
+        mann_normal = new Person("MannNormal", true, 180, 80);
+        
+        // Frauen
+        frau_uber = new Person("FrauUber", false, 160, 100);
+        frau_unter = new Person("FrauUnter", false, 200, 65);
+        frau_normal = new Person("FrauNormal", false, 160, 55);
+        System.out.println("----");
+        System.out.println("Setup complete");
+        System.out.println("Beginnt zu Testen");
     }
     
         @Test
     public void Test_BMI(){
-        //Mann
-        Person ferdi = new Person("Ferdinand", true, 181, 100);
+        // Mann
         assertEquals("Übergewicht", ferdi.bmiWerter(), "BMI Wertung"); //Korrekt
-        System.out.println(ferdi);
         //assertEquals("Übergewichtung", ferdi.bmiWerter(), "BMI Wertung"); //Error
-        Person mann_unter = new Person("MannUnter", true, 200, 65);
         assertEquals("Untergewicht", mann_unter.bmiWerter(), "BMI Wertung");
-        Person mann_normal = new Person("MannNormal", true, 180, 80);
         assertEquals("Normal", mann_normal.bmiWerter(), "BMI Wertung");
+                
         // Frau
-        Person frau_uber = new Person("FrauUber", false, 160, 100);
         assertEquals("Übergewicht", frau_uber.bmiWerter(), "BMI Wertung");
-        Person frau_unter = new Person("FrauUnter", false, 200, 65);
         assertEquals("Untergewicht", frau_unter.bmiWerter(), "BMI Wertung");
-        Person frau_normal = new Person("FrauNormal", false, 160, 55);
         assertEquals("Normal", frau_normal.bmiWerter(), "BMI Wertung");
     }
     
@@ -82,6 +86,6 @@ public class PersonTest
     @AfterEach
     public void tearDown()
     {
-        System.out.println("Executing TearDown()");
+        System.out.println("Test Ende");
     }
 }
