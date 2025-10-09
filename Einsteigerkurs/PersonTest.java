@@ -5,8 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * The test class PersonTest.
+
+ /** The test class PersonTest.
  *
  * @author  (your name)
  * @version (a version number or a date)
@@ -75,8 +75,7 @@ public class PersonTest
         }
     }
     
-    /**
-     * Tears down the test fixture.
+     /** Tears down the test fixture.
      *
      * Called after every test case method.
      */

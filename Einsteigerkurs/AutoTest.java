@@ -13,13 +13,12 @@ import org.junit.jupiter.api.Test;
  */
 public class AutoTest
 {
-    /**
-     * Default constructor for test class AutoTest
-     */
-    public AutoTest()
-    {
-    }
-
+    public Person Jakob;
+    public Person Fat1;
+    public Person Fat2;
+    public Person Fat3;
+    public Auto BMW;
+    
     /**
      * Sets up the test fixture.
      *
@@ -29,71 +28,98 @@ public class AutoTest
     // In setup personen und Autos erstellen 
     public void setUp()
     {
-        System.out.println("Executing SetUp()");
+        Jakob = new Person("Jakob", true, 180,80);
+        Fat1 = new Person("Fat1",true,170,200);
+        Fat2 = new Person("Fat2",true,170,200);
+        Fat3 = new Person("Fat3",true,170,201);
+        BMW = new Auto("BMW", 2900);
+        System.out.println("----");
+        System.out.println("Setup complete");
+        System.out.println("Beginnt zu Testen");
+    }
+    
+    @Test
+    public void TestPersonMehrmalsImAuto(){
+        // Versucht die Person Jakob zweimal ins Auto zu setzen
+        try{
+            BMW.einsteigen(Jakob);
+            BMW.einsteigen(Jakob);
+        }
+        // Error wird aber abgefangen (Auto Class Zeile 72)
+        // Im Terminal wird dann die Nachricht angezeigt 
+        catch(Exception j){
+            System.out.println("Exception gefangen: " + j.getMessage());
+        }
+    }
+    
+    @Test
+    public void TestAutoAussteigenPerson(){
+        try {
+            BMW.einsteigen(Jakob);
+            BMW.aussteigen(Jakob);
+            BMW.aussteigen(Jakob);
+        }
+        catch (Exception a){
+            System.out.println("Exception gefange " + a.getMessage());
+        }
     }
     
     @Test
     public void TestGesamtGewichtAuto(){
         try {
-        Auto BMW = new Auto("BMW", 3000);
-        Person ferdi = new Person("Ferdinand", true, 181, 200); //Fahrer
-        BMW.einsteigen(ferdi);
-        Person marie = new Person("Marie", false, 160, 200); //Beifahrerin
-        BMW.einsteigen(marie);
-        Person hans = new Person("Hans", true, 170, 200); //Rückbank
-        BMW.einsteigen(hans);
-        BMW.autoAushalten();
-    } 
-    catch (Exception e){
-        System.out.println("Exception gefangen: " + e.getMessage());
-    }   
+            BMW.einsteigen(Fat1);
+            BMW.einsteigen(Fat2);
+            BMW.einsteigen(Fat3);
+            BMW.autoAushalten();
+        } 
+        catch (Exception e){
+            System.out.println("Exception gefangen: " + e.getMessage());
+        }   
     }
     
     @Test
     public void TestAuto(){
         // Autoname null Test
         try{
-            Auto Audi = new Auto(null, 2000);
+            BMW.setName(null);
         }
         catch (Exception n){
             System.out.println("Exception gefange: " + n.getMessage());
         }
+    }
+    
+    @Test
+    public void TestEigengewicht(){
         // Auto Eigengewicht mehr als 3000 Test
         try {
-            Auto Ford = new Auto("Ford", 3001);
+            BMW.setEigengewicht(3001);
         }
         catch (Exception k){
             System.out.println("Exception gefangen: " + k.getMessage());
         }
+    }
+    
+    @Test
+    public void TestAussteigenString(){
         // Aussteige Funktion Test
         try {
-            Auto Skoda = new Auto("Skoda", 1500);
-            Person Jakob = new Person("Jakob", true, 180, 80);
-            Skoda.einsteigen(Jakob);
-            Skoda.aussteigen("Bob"); //String Version
+            BMW.einsteigen(Jakob);
+            BMW.aussteigen("Bob"); //String Version
         }
         catch (Exception p){
             System.out.println("Exception gefangen: " + p.getMessage());
         }
+    }
+    
+    @Test
+    public void TestNull(){
         // Person nicht null Test
         try {
-            Auto Porsche = new Auto("Porsche", 1870);
-            Person Bob = null;
-            Porsche.einsteigen(Bob);
+            Jakob = null;
+            BMW.einsteigen(Jakob);
         }
         catch (Exception t){
             System.out.println("Exception gefangen: " + t.getMessage());
-        }
-        
-        // 2 gleiche Personen im Auto
-        try {
-            Auto Test = new Auto("Test", 2000);
-            Person Jakob = new Person("Jakob", true, 180, 80);
-            Test.einsteigen(Jakob);
-            Test.einsteigen(Jakob);
-        }
-        catch (Exception z){
-            System.out.println("Exception gefangen: " + z.getMessage());
         }
     }
     
@@ -105,6 +131,6 @@ public class AutoTest
     @AfterEach
     public void tearDown()
     {
-        System.out.println("Executing tearUp()");
+        System.out.println("Test Ende");
     }
 }
