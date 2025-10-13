@@ -22,5 +22,4 @@ public class quadrat
             System.out.print("\n");
         }
     }
-
 }

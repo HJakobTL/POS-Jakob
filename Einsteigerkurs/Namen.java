@@ -263,6 +263,53 @@ public class Namen
         return row.toString();
     }
     
+    // TODO better M
+    private static String M(int x, int zeile)
+    {
+        StringBuilder row = new StringBuilder();
+
+        for (int spalte = 0; spalte < x; spalte++){
+            if (spalte == 0 || zeile == 0 || spalte == x-1 || spalte == (x-1)/2){
+                row.append('#');
+            }
+            else {
+                row.append(" ");
+            }
+        }
+        return row.toString();
+    }
+    
+    // TODO better W
+    private static String W(int x, int zeile)
+    {
+        StringBuilder row = new StringBuilder();
+
+        for (int spalte = 0; spalte < x; spalte++){
+            if (spalte == 0 || zeile == x-1 || spalte == x-1 || spalte == (x-1)/2){
+                row.append('#');
+            }
+            else {
+                row.append(" ");
+            }
+        }
+        return row.toString();
+    }
+    
+    private static String N(int x, int zeile)
+    {
+        StringBuilder row = new StringBuilder();
+
+        for (int spalte = 0; spalte < x; spalte++){
+            if (spalte == 0 || spalte == x-1 || zeile == spalte){
+                row.append('#');
+            }
+            else {
+                row.append(" ");
+            }
+        }
+        return row.toString();
+    }
+    
     public static void JakobHorizontal(int x)
     {
         int spacing = 1; 
