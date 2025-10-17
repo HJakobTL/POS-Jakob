@@ -1,11 +1,4 @@
-/**
- * Write a description of class quadrat here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class quadrat {
-    private String[] hashes;
     public static void quadrat(int x) {
         for (int zeile = 0; zeile < x; zeile++) {
             for (int spalte = 0; spalte < x; spalte++) {
@@ -19,18 +12,19 @@ public class quadrat {
         }
     }
 
-    public void quadratArray(int x){
-        hashes = new String[x];
-        String box = "";
-        for(int zeile = 0; zeile < x; zeile++){
-            hashes[zeile] = "*";
-            for (int spalte = 0; spalte < x-1; spalte++){
-                hashes[spalte] = "*";
-                box += hashes[spalte] + " ";
+    public static void quadratArray(int x){
+        String[] stars;
+        stars = new String[x];
+        String line = "";
+        for (int i = 0; i < x; i++){
+            for (int j = 0; j < x; j++){
+                if (i == j || i == 0 || j == 0 || i == x-1 || j == x-1){
+                    line += "* ";
+                }
+                else line += "  ";
             }
-            box += hashes[zeile] + "\n";
+            line += "\n";
         }
-        System.out.print(box);
+        System.out.print(line);
     }
 }
-
