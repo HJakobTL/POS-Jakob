@@ -126,14 +126,7 @@ public class Namen
         StringBuilder row = new StringBuilder();
 
         for (int spalte = 0; spalte < x; spalte++){
-            if (spalte == zeile){
-                row.append('#');
-            }
-            else if (zeile == 0 && spalte == x-1){
-                row.append(" ");
-                row.append('#');
-            }
-            else if (zeile == x-spalte && spalte == x-zeile){
+            if (spalte == zeile || x - 1 == zeile + spalte){
                 row.append('#');
             }
             else row.append(" ");
