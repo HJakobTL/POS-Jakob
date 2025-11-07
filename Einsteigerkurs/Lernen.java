@@ -1,5 +1,7 @@
+import java.util.Random;
+
 public class Lernen
-{
+{   
     public static void Lernen()
     {
         // Aufgabe 1
@@ -14,7 +16,7 @@ public class Lernen
         //Aufgabe 3
         System.out.println(Feld[2]);
         // Aufgabe 4 -> Feld[5] == OutOfBound error;
-        
+
         // Aufgabe 5
         int[] Feld2 = new int[2];
         String arr2 = "";
@@ -23,5 +25,77 @@ public class Lernen
             arr2 += Feld[j];
         }
         System.out.println(arr2);
+
+        // Aufgabe 6
+        int[] hundert = new int[100];
+        String arr3 = "";
+        for (int i = 0; i < hundert.length; i++){
+            hundert[i] = i+1;
+            arr3 += hundert[i];
+        }
+        System.out.println(arr3);
+    }
+
+    public static void einsBisHundert(int[] a){
+        String arr3 = "";
+        for (int i = 0; i < a.length; i++){
+            a[i] = i+1;
+            arr3 += a[i];
+        }
+        System.out.println(arr3);
+    }
+
+    public static int[] wunschArray(int laenge){
+        int[] wunschArray = new int[laenge];
+        String line = "";
+        for(int i = 0; i < wunschArray.length; i++){
+            wunschArray[i] = i+1;
+            line += wunschArray[i];
+        }
+        System.out.println(line);
+        return wunschArray;
+    }
+
+    public static void aufgabeIDK(){
+        String arr1 = "";
+        String arr2 = "";
+
+        int[] eins = new int[5];
+        eins[0] = 12;
+        eins[1] = 4;
+        eins[2] = 7;
+        eins[3] = 5;
+        eins[4] = 200;
+
+        int[] Kopie = new int[5];
+        for(int k = 0; k < Kopie.length; k++){
+            Kopie[k] = eins[k];
+            arr1 += Kopie[k] + "\n";
+        }
+        System.out.println(arr1);
+
+        int[] reverse = new int[5];
+
+        for (int i = 0; i < reverse.length; i++){
+            reverse[i] = Kopie[Kopie.length-i-1];
+            arr2 += reverse[i] + "\n";
+        }
+        System.out.println(arr2);
+    }
+
+    public static int wurfel(){
+        Random rand = new Random();
+        int x = rand.nextInt(1,6);
+        return x;
+    }
+
+    public static String[] wurfelErgebnis(){
+        String[] Namen = new String[2];
+        Namen[0] = "Jakob " + wurfel();
+        Namen[1] = "Alex " + wurfel();
+        for(int i = 0; i < Namen.length; i++){
+            System.out.println(Namen[i]);   
+        }
+        return Namen;
     }
 }
