@@ -19,12 +19,12 @@ public class Figuren
         for (int zeile = 0; zeile < n; zeile++){
             for (int spalte = 0; spalte < n; spalte++){
                 if (zeile % 2 == 0 && spalte % 2 == 0){
-                    line += "#";
+                    line += "# ";
                 }
                 else if (zeile % 2 == 1 && spalte % 2 == 1){
-                    line += "#";
+                    line += "# ";
                 }
-                else line += " ";
+                else line += "  ";
             }
             line += "\n";
         }

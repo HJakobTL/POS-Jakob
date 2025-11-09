@@ -98,4 +98,39 @@ public class Lernen
         }
         return Namen;
     }
+
+    public static void Quadrat(int n){
+        String line = "";
+        for (int zeile = 0; zeile < n; zeile++){
+            for (int spalte = 0; spalte < n; spalte++){
+                if (zeile == 0 || spalte == 0 || zeile == n-1 || spalte == n-1 || zeile == spalte || zeile == n-spalte-1){
+                    line += "# ";
+                }
+                // else if (zeile == n/2 && spalte == n/2){
+                // line += "# ";
+                // }
+                else line += "  ";
+            }
+            line += "\n";
+        }
+        System.out.println(line);
+    }
+
+    public static void pyramid(int n){
+        String line = "";
+        n *= 2;
+        for (int zeile = 0;  zeile < n/2; zeile++){
+            for(int spalte = 0; spalte < n+1;spalte++){
+                if(spalte <= n/2 && spalte >= n/2-zeile-1){
+                    line += zeile;
+                }
+                else if (spalte >= n/2 && spalte <= n/2+zeile+1){
+                    line += zeile;
+                }
+                else line += " ";
+            }
+            line += "\n";
+        }
+        System.out.print(line);
+    }
 }
