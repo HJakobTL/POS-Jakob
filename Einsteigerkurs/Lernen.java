@@ -122,10 +122,10 @@ public class Lernen
         for (int zeile = 0;  zeile < n/2; zeile++){
             for(int spalte = 0; spalte < n+1;spalte++){
                 if(spalte <= n/2 && spalte >= n/2-zeile){
-                    line += zeile;
+                    line += spalte;
                 }
                 else if (spalte >= n/2 && spalte <= n/2+zeile){
-                    line += zeile;
+                    line += spalte;
                 }
                 else line += " ";
             }
@@ -133,6 +133,7 @@ public class Lernen
         }
         System.out.print(line);
     }
+    
      public static void diamand(int n){
         String line = "";
         n *= 2;
@@ -145,6 +146,23 @@ public class Lernen
                     line += zeile;
                 }
                 else line += " ";
+            }
+            line += "\n";
+        }
+        System.out.print(line);
+    }
+    
+    public static void Rechteck(int n){
+        String line = "";
+        for (int zeile = 0;  zeile < n; zeile++){
+            for(int spalte = 0; spalte < n;spalte++){
+                if(zeile == 0 || zeile == n/2){
+                    line += "# ";
+                }
+                else if((zeile < n/2 && spalte == 0) || (zeile < n/2 &&  spalte == n-1)){
+                    line += "# ";
+                }
+                else line += "  ";
             }
             line += "\n";
         }
