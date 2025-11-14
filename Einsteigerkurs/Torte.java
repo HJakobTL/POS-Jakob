@@ -1,6 +1,6 @@
 public class Torte
 {
-       public static void hochzeit(int n){
+    public static void hochzeit(int n){
         String line = "";
         n *= 2;
         for (int zeile = 0;  zeile < n/2; zeile++){
@@ -11,11 +11,17 @@ public class Torte
                 if (spalte == n/2+zeile+1){
                     line += "]";
                 }
-                if(spalte <= n/2 && spalte >= n/2-zeile){
-                    line += "#";
+                if ( zeile % 2 == 0 && spalte == n/2+zeile+1){
+                    line += "¡";
+                }
+                else if ( zeile % 2 == 0 && spalte == n/2-zeile-1){
+                    line += "¡";
+                }
+                else if(spalte <= n/2 && spalte >= n/2-zeile){
+                    line += "*";
                 }
                 else if (spalte >= n/2 && spalte <= n/2+zeile){
-                    line += "#";
+                    line += "*";
                 }
                 else line += " ";
             }
