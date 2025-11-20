@@ -1,3 +1,7 @@
+public static void main(String[] args){
+    Torte.hochzeit(6);
+}
+
 public class Torte
 {
     public static void hochzeit(int n){
@@ -30,3 +34,4 @@ public class Torte
         System.out.print(line);
     }
 }
+
