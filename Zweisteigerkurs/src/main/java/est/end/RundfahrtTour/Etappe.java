@@ -10,8 +10,7 @@ public class Etappe {
     private int minuten;
 
     // Eine Ettape
-    public Etappe(int nummer,float laenge, String zielOrt, String sieger, int stunden, int minuten){
-        this.setNummer(nummer);
+    public Etappe(float laenge, String zielOrt, String sieger, int stunden, int minuten){
         this.setLaenge(laenge);
         this.setZielOrt(zielOrt);
         this.setSieger(sieger);

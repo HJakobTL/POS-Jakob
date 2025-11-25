@@ -9,10 +9,10 @@ public class MainRundfahrt {
 
     void main (){
         System.out.println("Test Start");
-        e1 = new Etappe(1,100,"Wien","Jakob",5,30);
-        e2 = new Etappe(2,300,"Krems","Alex",5,51);
-        e3 = new Etappe(3,500,"St.Bloedsinn","Jakob",5, 29);
-        e49 = new Etappe(49,700,"Simmering","Tobias",3,18);
+        e1 = new Etappe(100,"Wien","Jakob",5,30);
+        e2 = new Etappe(300,"Krems","Alex",5,51);
+        e3 = new Etappe(500,"St.Bloedsinn","Jakob",5, 29);
+        e49 = new Etappe(700,"Simmering","Tobias",3,18);
         rf = new Rundfahrt("Wien Rundfahrt",50);
         /*System.out.println(e1.toString());
 
@@ -36,13 +36,15 @@ public class MainRundfahrt {
         for (int i = 0; i <= 20; i++) {
             if (i < 20) rf.hinzufuegen(e2);
         }
-        for (int i = 0; i <= 10; i++) {
-            if (i < 10) rf.hinzufuegen(e3);
+        for (int i = 0; i <= 8; i++) {
+            if (i < 8) rf.hinzufuegen(e3);
         }
 
-        // TODO Probleme hier fixen
-        //rf.annullieren(49);
-        //rf.hinzufuegen(e49);
+        /* TODO Probleme hier fixen
+        Das man genaue POS löschen kann
+        Und mehr Errors oder so ich bin sad :(
+        */
+
 
         System.out.println(rf.toString());
 

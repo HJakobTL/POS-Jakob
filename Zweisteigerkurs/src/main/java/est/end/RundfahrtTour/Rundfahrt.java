@@ -46,11 +46,10 @@ public class Rundfahrt {
 
     // Eine Etappe wieder löschen
     public boolean annullieren(int pos){
-        pos = 1;
-        if (pos < 1){
+        if (pos < 0){
             throw new IllegalArgumentException("Kann nicht kleiner 0 sein");
         }
-        for (int i = 1; i < etappen.length; i++) {
+        for (int i = 0; i < etappen.length; i++) {
             if (i == pos){
                 etappen[i] = null;
                 return true;
@@ -62,9 +61,10 @@ public class Rundfahrt {
     // Gibt von jeder Etappe die es gibt, deren Infos zurück
     public String etappenUebersich(){
         String alleEtappen = "";
-        for (Etappe etappe: etappen){
-            if (etappe != null){
-                alleEtappen += etappe.toString();
+        for (int i = 0; i < etappen.length; i++){
+            if (etappen[i] != null){
+                etappen[i].setNummer(i+1);
+                alleEtappen += etappen[i].toString();
             }
         }
         return alleEtappen;
@@ -168,7 +168,7 @@ public class Rundfahrt {
         }
         gesDauerStunden += MinZuStunden(gesDauerMinuten);
         gesDauerMinuten = RestMin(gesDauerMinuten);
-        return "Stunden: " + gesDauerStunden + " Minuten: " + gesDauerMinuten;
+        return gesDauerStunden + " Std," + gesDauerMinuten + " Minuten";
     }
 
     // Gibt alle Infos einer Rundfahrt zurück
