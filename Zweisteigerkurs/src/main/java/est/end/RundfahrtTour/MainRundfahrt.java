@@ -5,48 +5,33 @@ public class MainRundfahrt {
     public Etappe e1;
     public Etappe e2;
     public Etappe e3;
-    public Etappe e49;
 
     void main (){
-        System.out.println("Test Start");
-        e1 = new Etappe(100,"Wien","Jakob",5,30);
-        e2 = new Etappe(300,"Krems","Alex",5,51);
-        e3 = new Etappe(500,"St.Bloedsinn","Jakob",5, 29);
-        e49 = new Etappe(700,"Simmering","Tobias",3,18);
-        rf = new Rundfahrt("Wien Rundfahrt",50);
-        /*System.out.println(e1.toString());
+        e1 = new Etappe("Wien", 100,"Jakob",5,30);
+        e2 = new Etappe("Krems", 300,"Alex",4,31);
+        e3 = new Etappe("St.Bloedsinn", 500,"Jakob",3,0);
+        rf = new Rundfahrt("Wien Rundfahrt");
 
-        rf.hinzufuegen(e1);
-        rf.hinzufuegen(e2);
-        rf.hinzufuegen(e3);
-        rf.annullieren(2);
-        System.out.println(rf.etappenUebersich());
-        System.out.println(rf.berechneGesamtlaenge());
-        System.out.println(rf.berechneDurchschnittslaenge());
-        System.out.println(e1.getSieger());
-        System.out.println(rf.anzGewonnen("Jakob"));
-        for (int i = 0; i < 50; i++) {
-            System.out.println(rf.getEtappen()[i]);
-        }
-        System.out.println(rf.berechneGesDauer());*/
+        try {
+            rf.hinzufuegen(e1);
+            rf.hinzufuegen(e2);
+            rf.hinzufuegen(e3);
+            rf.annullieren(2);
+            rf.hinzufuegen(e2);
+            System.out.println("Test");
+            System.out.println(rf.toString());
+            System.out.println("Der Fahrer Jakob hat " + rf.anzGewonnen("Jakob") + " mal gewonnen!");
 
-        for (int i = 0; i <= 20; i++) {
-            if (i < 20) rf.hinzufuegen(e1);
+        } catch (IllegalArgumentException ex){
+            System.out.println("Fehler5: " + ex.getMessage());
         }
-        for (int i = 0; i <= 20; i++) {
-            if (i < 20) rf.hinzufuegen(e2);
-        }
-        for (int i = 0; i <= 8; i++) {
-            if (i < 8) rf.hinzufuegen(e3);
-        }
+
+
+
 
         /* TODO Probleme hier fixen
         Das man genaue POS löschen kann
         Und mehr Errors oder so ich bin sad :(
         */
-
-
-        System.out.println(rf.toString());
-
     }
 }
