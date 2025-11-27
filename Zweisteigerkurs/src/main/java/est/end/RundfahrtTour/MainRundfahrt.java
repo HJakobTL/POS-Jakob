@@ -32,6 +32,7 @@ public class MainRundfahrt {
         /* TODO Probleme hier fixen
         Das man genaue POS löschen kann
         Und mehr Errors oder so ich bin sad :(
+        TODO NICHT MEHR !!!
         */
     }
 }
