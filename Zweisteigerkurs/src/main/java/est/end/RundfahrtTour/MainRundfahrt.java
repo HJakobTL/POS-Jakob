@@ -5,11 +5,15 @@ public class MainRundfahrt {
     public Etappe e1;
     public Etappe e2;
     public Etappe e3;
+    public Etappe e4;
+    public Etappe e5;
 
     void main (){
         e1 = new Etappe("Wien", 100,"Jakob",5,30);
-        e2 = new Etappe("Krems", 300,"Alex",4,31);
-        e3 = new Etappe("St.Bloedsinn", 500,"Jakob",3,0);
+        e2 = new Etappe("Krems", 200,"Alex",4,31);
+        e3 = new Etappe("St.Bloedsinn", 1000,"Jakob",3,0);
+        e4 = new Etappe("Test",800,"Jakob",4,30);
+        e5 = new Etappe("Test2",600,"Test3",3,50);
         rf = new Rundfahrt("Wien Rundfahrt");
 
         try {
@@ -18,6 +22,8 @@ public class MainRundfahrt {
             rf.hinzufuegen(e3);
             rf.annullieren(2);
             rf.hinzufuegen(e2);
+            rf.hinzufuegen(e4);
+            rf.hinzufuegen(e5);
             System.out.println("Test");
             System.out.println(rf.toString());
             System.out.println("Der Fahrer Jakob hat " + rf.anzGewonnen("Jakob") + " mal gewonnen!");

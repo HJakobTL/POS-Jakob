@@ -79,9 +79,8 @@ public class Rundfahrt {
     public float sucheLaengsteEtappe(){
         float rv = 0;
         for (int i = 0; i < etappen.length; i++) {
-            if (etappen[i] != null) rv = etappen[i].getLaenge();
             for (int j = i+1; j < etappen.length; j++) {
-                if (etappen[j] != null && rv >  etappen[j].getLaenge())
+                if (etappen[j] != null && rv < etappen[j].getLaenge())
                     rv = etappen[j].getLaenge();
             }
         }
