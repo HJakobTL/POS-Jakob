@@ -1,4 +1,4 @@
-package est.end.RundfahrtTour;
+package org.example.test;
 
 public class Rundfahrt {
     private String name;
@@ -78,7 +78,7 @@ public class Rundfahrt {
     // Gibt die Längste Etappe zurück
     public float sucheLaengsteEtappe(){
         float rv = 0;
-        if (etappen[0] != null) rv = etappen[0].getLaenge();
+        if(etappen[0] != null) rv = etappen[0].getLaenge();
         for (int i = 0; i < etappen.length; i++) {
             for (int j = i+1; j < etappen.length; j++) {
                 if (etappen[j] != null && rv < etappen[j].getLaenge())
