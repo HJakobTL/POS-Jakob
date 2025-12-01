@@ -1,26 +1,43 @@
 package org.example.test;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class HelloController {
 
-    org.example.test.Rundfahrt r1 = new org.example.test.Rundfahrt("Wien Rundfahrt");
-    org.example.test.Etappe e1 = new org.example.test.Etappe("Wien",100,"Jakob",3,40);
-    org.example.test.Etappe e2 = new Etappe("Wien",200,"Jakob",2,12);
-
+    Rundfahrt r1 = new Rundfahrt("Wien Rundfahrt");
 
     @FXML
     private Label welcomeText;
+    @FXML
+    private TextField zielOrtField;
+    @FXML
+    private TextField laengeField;
+    @FXML
+    private TextField siegerField;
+    @FXML
+    private TextField stundenField;
+    @FXML
+    private TextField minutenField;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText(r1.toString());
+    protected void addEtappe(ActionEvent event) {
+        // Die Werte der Textfelder mit der Methode getText() abrufen
+        String zielOrt = zielOrtField.getText();
+        float laengeText = Integer.parseInt(laengeField.getText());
+        String sieger = siegerField.getText();
+        int stundenText = Integer.parseInt(stundenField.getText());
+        int minutenText = Integer.parseInt(minutenField.getText());
+
+        Etappe etappe = new Etappe(zielOrt,laengeText,sieger,stundenText,minutenText);
+        r1.hinzufuegen(etappe);
+        welcomeText.setText("Etappe " +  etappe.getNummer() + " hinzugefügt!");
     }
 
     @FXML
-    protected void addEtappe(){
-        r1.hinzufuegen(e1);
-        r1.hinzufuegen(e2);
+    protected void onHelloButtonClick(){
+        welcomeText.setText(r1.toString());
     }
 }
