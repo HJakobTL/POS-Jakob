@@ -17,14 +17,14 @@ public class Matrix {
     }
 
     public int[][] mal(int[][] a, int[][] b){
-        int[][] r = new int[2][2];
-        for (int i = 0; i < r.length; i++) {
-            for (int j = 0; j < r.length; j++) {
-                for (int k = 0; k < r.length+1; k++) {
-                    r[i][j] += a[i][k] * b[k][j];
+        array = new int[getRows()][getSpaces()];
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getSpaces(); j++) {
+                for (int k = 0; k < getRows()+1; k++) {
+                    array[i][j] += a[i][k] * b[k][j];
                 }
             }
         }
-        return r;
+        return array;
     }
 }

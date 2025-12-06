@@ -80,10 +80,8 @@ public class Rundfahrt {
         float rv = 0;
         if (etappen[0] != null) rv = etappen[0].getLaenge();
         for (int i = 0; i < etappen.length; i++) {
-            for (int j = i+1; j < etappen.length; j++) {
-                if (etappen[j] != null && rv < etappen[j].getLaenge())
-                    rv = etappen[j].getLaenge();
-            }
+            if (etappen[i] != null && rv < etappen[i].getLaenge())
+                rv = etappen[i].getLaenge();
         }
         return rv;
     }
