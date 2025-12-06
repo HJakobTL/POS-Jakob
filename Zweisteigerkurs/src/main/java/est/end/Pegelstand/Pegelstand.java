@@ -77,6 +77,92 @@ public class Pegelstand {
         return maxIndex;
     }
 
+    public int getWert(int index){
+        if (index < 0 || index > 6) return -99;
+        return werte[index];
+    }
+
+    public boolean messen(int wert){
+        if (wert < 0) {
+            return false;
+        }
+        for (int i = 0; i < werte.length; i++) {
+            if (werte[i] == 0) {
+                werte[i] = wert;
+                anzahl++;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean tauschen(int index1, int index2){
+        if (index1 < 0 || index1 > 6 || index2 < 0 || index2 > 6) throw new IllegalArgumentException("Indexe sind out of Range");
+        int tmp_Wert = werte[index1];
+        werte[index1] = werte[index2];
+        werte[index2] = tmp_Wert;
+        return true;
+    }
+
+    public void entferneLetzenWert(){
+        if (werte[anzahl-1] == 0) throw new IllegalArgumentException("Platz ist schon 0");
+        werte[anzahl-1] = 0;
+        anzahl--;
+    }
+
+    public void loeschen(int index){
+        if (index < 0 || index > 6 ) throw new IllegalArgumentException("Index out of Range");
+        if (werte[index] != 0) {
+            werte[index] = 0;
+            anzahl--;
+        }
+        tauschen(index,anzahl);
+    }
+
+    public int leeren(){
+        int sum_entf_Werte = 0;
+        for (int i = 0; i < werte.length; i++) {
+            if (werte[i] != 0){
+                werte[i] = 0;
+                sum_entf_Werte++;
+                anzahl--;
+            }
+        }
+        return sum_entf_Werte;
+    }
+
+    public void einfuegen(int index, int wert){
+        if (index < 0 || index > 6) throw new IllegalArgumentException("Index darf nicht größer 6 und nicht kleiner 0 sein");
+        if (wert < 0) throw new IllegalArgumentException("Wert kann nicht kleiner 0 sein!");
+        if (werte[index] != 0) {
+            werte[index] = wert;
+        }
+        if (werte[index] == 0){
+            werte[index] = wert;
+            anzahl++;
+        }
+    }
+
+    public int[] ueberschreibenAlle(int wert){
+        if (wert < 0) throw new IllegalArgumentException("Wert darf nicht unter 0 sein");
+        Arrays.fill(werte, wert);
+        return werte;
+    }
+
+    public void printHoehenprofil(){
+        StringBuilder sb = new StringBuilder();
+        int laenge;
+        if (anzahl > 0){
+            for (int i = 0; i < anzahl; i++) {
+                laenge = werte[i] / 10;
+                sb.append("[").append(i).append("]: ");
+                sb.append("~".repeat(Math.max(0, laenge)));
+                sb.append(" (").append(werte[i]).append(" cm)\n");
+            }
+        }
+        System.out.println(sb);
+    }
+
     public void printPegelStand(){
         StringBuilder sb = new StringBuilder();
         sb.append(fluss).append("\n");
@@ -90,16 +176,30 @@ public class Pegelstand {
         }
         else sb.append("Keine Werte vorhanden");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
+
+    public String hohenprofilToString(char zeichen, int skalengroesse){
+        StringBuilder sb = new StringBuilder();
+        int laenge;
+        if (anzahl > 0){
+            for (int i = 0; i < anzahl; i++) {
+                laenge = werte[i] / skalengroesse;
+                sb.append("[").append(i).append("]: ");
+                sb.append(String.valueOf(zeichen).repeat(Math.max(0, laenge)));
+                sb.append(" (").append(werte[i]).append(" cm)\n");
+            }
+            sb.append("Ein ").append(zeichen).append(" entspricht ca. ").append(skalengroesse).append(" cm\n");
+        }
+        return sb.toString();
+    }
+
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Pegelstand: ");
-        sb.append(fluss);
-        sb.append(Arrays.toString(werte));
-        sb.append(", ").append(anzahl);
-        sb.append(" Messwerte");
-        return sb.toString();
+        return "Pegelstand: " + fluss +
+                Arrays.toString(werte) +
+                ", " + anzahl +
+                " Messwerte";
     }
 }
