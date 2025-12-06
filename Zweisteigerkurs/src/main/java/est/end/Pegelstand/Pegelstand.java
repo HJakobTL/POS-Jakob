@@ -55,18 +55,21 @@ public class Pegelstand {
         return sum/anzahl;
     }
 
-    public float kleinsterWert(){
-        if (anzahl == 0) return -99f;
-        float kWert = werte[0];
-        for (int i = 0; i < anzahl; i++) {
-            if (kWert > werte[i]) kWert = werte[i];
+    public int kleinsterWert(){
+        int kWert = 0;
+        if (anzahl == 0) return -99;
+        if (anzahl > 0) {
+             kWert = werte[0];
+            for (int i = 0; i < anzahl; i++) {
+                if (kWert > werte[i]) kWert = werte[i];
+            }
         }
         return kWert;
     }
 
     public int maxIndex(){
         if (anzahl == 0) return -99;
-        float maxWert = werte[0];
+        int maxWert = werte[0];
         int maxIndex = 0;
         for (int i = 0; i < anzahl; i++) {
             if (werte[i] > maxWert){
@@ -110,6 +113,7 @@ public class Pegelstand {
         anzahl--;
     }
 
+    //TODO verbessern
     public void loeschen(int index){
         if (index < 0 || index > 6 ) throw new IllegalArgumentException("Index out of Range");
         if (werte[index] != 0) {
@@ -131,6 +135,7 @@ public class Pegelstand {
         return sum_entf_Werte;
     }
 
+    // TODO optimieren
     public void einfuegen(int index, int wert){
         if (index < 0 || index > 6) throw new IllegalArgumentException("Index darf nicht größer 6 und nicht kleiner 0 sein");
         if (wert < 0) throw new IllegalArgumentException("Wert kann nicht kleiner 0 sein!");
