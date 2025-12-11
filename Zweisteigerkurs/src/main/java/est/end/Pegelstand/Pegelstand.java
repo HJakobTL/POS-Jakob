@@ -28,6 +28,10 @@ public class Pegelstand {
         return anzahl;
     }
 
+    public int[] getWerte() {
+        return werte;
+    }
+
     // Setter
     public void setFluss(String fluss) {
         if (fluss != null && !fluss.isEmpty()) this.fluss = fluss;
@@ -81,26 +85,23 @@ public class Pegelstand {
     }
 
     public int getWert(int index){
-        if (index < 0 || index > 6) return -99;
+        if (index < 0 || index >= werte.length) return -99;
         return werte[index];
     }
 
-    public boolean messen(int wert){
-        if (wert < 0) {
+    public boolean messen(int wert) {
+        if (wert < 0 || anzahl >= werte.length) {
             return false;
         }
-        for (int i = 0; i < werte.length; i++) {
-            if (werte[i] == 0) {
-                werte[i] = wert;
-                anzahl++;
-                return true;
-            }
-        }
-        return false;
+        werte[anzahl] = wert;
+        anzahl++;
+        return true;
     }
 
     public boolean tauschen(int index1, int index2){
-        if (index1 < 0 || index1 > 6 || index2 < 0 || index2 > 6) throw new IllegalArgumentException("Indexe sind out of Range");
+        if (index1 < 0 || index1 >= anzahl || index2 < 0 || index2 >= anzahl) {
+            return false;
+        }
         int tmp_Wert = werte[index1];
         werte[index1] = werte[index2];
         werte[index2] = tmp_Wert;
@@ -108,19 +109,20 @@ public class Pegelstand {
     }
 
     public void entferneLetzenWert(){
-        if (werte[anzahl-1] == 0) throw new IllegalArgumentException("Platz ist schon 0");
+        if (werte[anzahl-1] <= 0) throw new IllegalArgumentException("Platz ist schon 0 oder es gibt keine Messwerte");
         werte[anzahl-1] = 0;
         anzahl--;
     }
 
-    //TODO verbessern
     public void loeschen(int index){
-        if (index < 0 || index > 6 ) throw new IllegalArgumentException("Index out of Range");
-        if (werte[index] != 0) {
-            werte[index] = 0;
+        if (index < 0 || index >= anzahl ) throw new IllegalArgumentException("Fehler: Hier gibt's nichts zu löschen (Index ist schon 0)");
+        for (int i = 0; i < anzahl-1; i++) {
+            werte[i] = werte[i+1];
+        }
+        if (werte[anzahl-1] != 0) {
+            werte[anzahl-1] = 0;
             anzahl--;
         }
-        tauschen(index,anzahl);
     }
 
     public int leeren(){
@@ -135,18 +137,23 @@ public class Pegelstand {
         return sum_entf_Werte;
     }
 
-    // TODO optimieren
     public void einfuegen(int index, int wert){
-        if (index < 0 || index > 6) throw new IllegalArgumentException("Index darf nicht größer 6 und nicht kleiner 0 sein");
-        if (wert < 0) throw new IllegalArgumentException("Wert kann nicht kleiner 0 sein!");
-        if (werte[index] != 0) {
-            werte[index] = wert;
+        if (anzahl > 7) System.out.println("Kein Platz zum Einfügen");
+        if (wert < 0) System.out.println("Wert ist ungültig");
+        if (index < 0 || index > anzahl) System.out.println("Fehler: Index ist ungültig");
+        for (int i = anzahl; i > index; i--) {
+            werte[i] = werte[i-1];
         }
-        if (werte[index] == 0){
-            werte[index] = wert;
-            anzahl++;
+        werte[index] = wert;
+        anzahl++;
+    }
+
+    public void sortiereWerte(){
+        for (int i = 0; i < anzahl-1; i++) {
+            for (int j = 0; j < anzahl-1-i; j++) if (werte[j] > werte[j + 1]) tauschen(j, j + 1);
         }
     }
+
 
     public int[] ueberschreibenAlle(int wert){
         if (wert < 0) throw new IllegalArgumentException("Wert darf nicht unter 0 sein");
@@ -172,7 +179,7 @@ public class Pegelstand {
         StringBuilder sb = new StringBuilder();
         sb.append(fluss).append("\n");
         if (anzahl > 0) {
-            for (int i = 0; i < werte.length; i++){
+            for (int i = 0; i < anzahl; i++){
                 // concat Problem
                 // System.out.println("[" + i + "]: " + werte[i] + " cm");
                 sb.append("[").append(i).append("]: ").append(werte[i]).append(" cm \n");

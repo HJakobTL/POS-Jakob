@@ -91,16 +91,17 @@ class PegelstandTest {
     }
 
     @Test
-    void messenTest(){
+    void testMessen_sollFunktionieren_leeresArray_messen7Werte_7xTrue_anzahl7(){
         //given
         Pegelstand pegelstand = new Pegelstand("Test");
-        //when
-        pegelstand.messen(200);
-        pegelstand.messen(310);
-        pegelstand.messen(230);
-        pegelstand.messen(340);
-        pegelstand.messen(100);
         System.out.println(pegelstand);
+        //when
+        for (int i = 0; i < 7; i++) {
+            assertTrue(pegelstand.messen(i));
+        }
+        //then
+        System.out.println(pegelstand);
+        assertEquals(7,pegelstand.getAnzahl());
     }
 
     @Test
@@ -117,14 +118,12 @@ class PegelstandTest {
         //given
         Pegelstand pegelstand = new Pegelstand();
         //when
-        pegelstand.fuellTestWerte();
-        int expected = pegelstand.getWert(5); // i2 = 310 ,i5 = 300
-        pegelstand.printPegelStand();
-        pegelstand.tauschen(2,5);
-        int actual = pegelstand.getWert(2); // i2=300, i5 = 310
+        for (int i = 0; i < 7; i++) {
+            assertTrue(pegelstand.messen(i)); //0,1,2,3,4,5,6
+        }
+        assertTrue(pegelstand.tauschen(2,4)); //0,1,4,3,2,5,6
         pegelstand.printPegelStand();
         //then
-        assertEquals(expected,actual);
     }
 
     @Test
@@ -158,12 +157,18 @@ class PegelstandTest {
     void loeschenTest(){
         //given
         Pegelstand pegelstand = new Pegelstand("Test");
-        //when
-        pegelstand.fuellTestWerte();
-        pegelstand.loeschen(3); //rm 310
-        pegelstand.loeschen(3); //rm 300
-        pegelstand.printPegelStand();
         System.out.println(pegelstand);
+        //when
+        for (int i = 0; i < 3; i++) {
+            assertTrue(pegelstand.messen(i));
+        }
+        //then
+        pegelstand.loeschen(0);
+        assertEquals(2,pegelstand.getAnzahl());
+        assertEquals(1,pegelstand.getWert(0));
+        assertEquals(2, pegelstand.getWert(1));
+        System.out.println(pegelstand);
+        pegelstand.printPegelStand();
     }
 
     @Test
@@ -186,9 +191,10 @@ class PegelstandTest {
         //given
         Pegelstand pegelstand = new Pegelstand("Test");
         //when
-        pegelstand.fuellTestWerte();
-        pegelstand.loeschen(3);
-        pegelstand.einfuegen(6,500); // statt 300 soll 500
+        for (int i = 0; i < 4; i++) {
+            assertTrue(pegelstand.messen(i)); // 0,1,2,3,4
+        }
+        pegelstand.einfuegen(2,500); // an Index 2 soll 500, rest wird nach rechts verschoben
         pegelstand.printPegelStand();
     }
 
@@ -196,9 +202,29 @@ class PegelstandTest {
     void ueberschreibenAlle(){
         //given
         Pegelstand pegelstand = new Pegelstand("Test");
+        for (int i = 0; i < 7; i++) {
+            pegelstand.messen(500);
+        }
         //when
-        pegelstand.fuellTestWerte();
-        pegelstand.ueberschreibenAlle(500); // Alle Werte werden 500;
+        assertEquals(pegelstand.getWerte(),pegelstand.ueberschreibenAlle(500));// Alle Werte werden 500;
         System.out.println(pegelstand);
+    }
+
+    @Test
+    void sortPegelstand(){
+        //given
+        Pegelstand pegelstand = new Pegelstand();
+        int wert = 6;
+        do {
+            assertTrue(pegelstand.messen(wert));
+            wert--;
+        } while (wert >= 0);
+        pegelstand.printPegelStand();
+        System.out.println();
+        //when
+        pegelstand.sortiereWerte();
+        //then
+        pegelstand.printPegelStand();
+        pegelstand.ausgebenWerte();
     }
 }
