@@ -12,6 +12,9 @@ public class Warenkorb {
     }
 
     public void getArtikel(String bezeichnung, double preis) {
+        if (bezeichnung == null){
+            throw new IllegalArgumentException("Bezeichnung kann nicht null sein");
+        }
         System.out.println(bezeichnung + ": " + preis + "€");
     }
 
