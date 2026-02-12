@@ -1,5 +1,6 @@
 package est.end.Autobus;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Person {
@@ -13,5 +14,17 @@ public class Person {
     public Person() {
         // Wir vergeben unsere ID selber
         this.id = rnd.nextInt(1,3001);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

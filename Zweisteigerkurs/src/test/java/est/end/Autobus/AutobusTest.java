@@ -1,12 +1,9 @@
 package est.end.Autobus;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -89,6 +86,12 @@ public class AutobusTest {
     */
     @Test
     void einsteigen() {
+        Autobus test1 = new Autobus(5);
+        Person anna = new Person(1);
+        Person anna2 = new Person(1);
+        assertTrue(test1.einsteigen(anna));
+        assertFalse(test1.einsteigen(anna));
+        assertFalse(test1.einsteigen(anna2));
     }
 
     @Test
