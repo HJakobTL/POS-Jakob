@@ -1,6 +1,7 @@
 package est.end;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Personalbuero {
 
@@ -35,6 +36,35 @@ public class Personalbuero {
     public int zaehleMitarbeiter() {
         return employees.size();
     }
+
+    public int kuendigeAlle(String name) {
+        if (name == null) throw new IllegalArgumentException("Fehler: null");
+        if (employees.isEmpty()) return -99;
+        int count = 0;
+        Iterator<Mitarbeiter> iterator = employees.iterator();
+        while(iterator.hasNext()) {
+            if (iterator.next().getName().equals(name)){
+                iterator.remove();
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public float kuendigen(float gehalt){
+        if (employees.isEmpty()) throw new IllegalArgumentException("Error: Keine Employees");
+        Iterator<Mitarbeiter> iterator = employees.iterator();
+        double gehaltSumme = 0.0;
+        while(iterator.hasNext()) {
+            Mitarbeiter ma = iterator.next();
+            if (ma.berechneGehalt() > (double) gehalt) {
+                gehaltSumme += ma.berechneGehalt();
+                iterator.remove();
+            }
+        }
+        return (float) gehaltSumme;
+    }
+
 
     @Override
     public String toString() {
