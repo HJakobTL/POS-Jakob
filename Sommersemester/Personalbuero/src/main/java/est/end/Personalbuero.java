@@ -2,15 +2,16 @@ package est.end;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Personalbuero {
 
-    private final ArrayList<Mitarbeiter> employees;
+    private final LinkedList<Mitarbeiter> employees;
 
     public Personalbuero() {
-        employees = new ArrayList<>();
+        employees = new LinkedList<>();
     }
-
+ 
     public boolean aufnehmen(Mitarbeiter ma) {
         if (ma == null || ma.berechneAlter() < 15 || employees.contains(ma)) return false;
         return employees.add(ma);

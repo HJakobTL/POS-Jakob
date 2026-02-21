@@ -63,12 +63,23 @@ public class Mitarbeiter {
     }
 
     public double berechnePraemie() {
-        double praemie = 0;
-        if (this.dienstAlter() >= 15 && this.dienstAlter() < 20) praemie = 1;
-        if (this.dienstAlter() >= 20 && this.dienstAlter() < 25) praemie = 2;
-        if (this.dienstAlter() >= 25 && this.dienstAlter() < 50) praemie = 3;
-        if (this.dienstAlter() > 50) praemie = 6;
-        return praemie * 1500;
+        /*  Alte Version
+         * switch(dienstAlter()) {
+            case 15: return berechneGehalt(); // break;
+            case 20: return berechneGehalt()*2; //  break;
+            case 25: return berechneGehalt()*3; // break;
+            case 50: return berechneGehalt()*6; // break;
+            default: return 0.0;
+        }
+        */
+        // Neue Version
+        return switch (dienstAlter()) {
+            case 15 -> berechneGehalt();
+            case 20 -> berechneGehalt()*2;
+            case 25 -> berechneGehalt()*3;
+            case 50 -> berechneGehalt()*7;
+            default -> 0.0;
+        };
     }
 
     @Override
