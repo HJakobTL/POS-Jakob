@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class Main {
     static void main() {
-        Personalbuero p1 = new Personalbuero();
+        /*Personalbuero p1 = new Personalbuero();
         Personalbuero p2 = new Personalbuero();
         Mitarbeiter m1 = new Mitarbeiter();
         IO.println(m1);
@@ -22,5 +22,6 @@ public class Main {
         IO.println(p1.zaehleMitarbeiter());
         IO.println(p1);
         IO.println(p2);
+         */
     }
 }

@@ -17,18 +17,18 @@ class PersonalbueroTest {
     void tearDown() {
     }
 
-    @Test
+    /*@Test
     void testMitarbeiter(){
         Mitarbeiter mitarbeiter = new Mitarbeiter("Anna", Year.of(2001), Year.now());
         IO.println(mitarbeiter);
-    }
+    }*/
 
     @Test
     void kuendigeAlleTest(){
         Personalbuero p1 = new Personalbuero();
-        Mitarbeiter mitarbeiter1 = new Mitarbeiter("Anna", Year.of(2001), Year.now());
-        Mitarbeiter mitarbeiter2 = new Mitarbeiter("Herbert", Year.of(2001), Year.now());
-        Mitarbeiter mitarbeiter3 = new Mitarbeiter("Hans", Year.of(2001), Year.now());
+        Mitarbeiter mitarbeiter1 = new Angestellter("Anna", Year.of(2001), Year.now());
+        Mitarbeiter mitarbeiter2 = new Angestellter("Herbert", Year.of(2001), Year.now());
+        Mitarbeiter mitarbeiter3 = new Angestellter("Hans", Year.of(2001), Year.now());
 
         p1.aufnehmen(mitarbeiter1);
         p1.aufnehmen(mitarbeiter2);
@@ -37,7 +37,7 @@ class PersonalbueroTest {
         int gekundigt = p1.kuendigeAlle("Herbert");
         assertEquals(1,gekundigt);
 
-        float moneygekundigt = p1.kuendigen(1400);
+        float moneygekundigt = p1.kuendigenGeld(1400);
         assertEquals(3000,moneygekundigt);
     }
 
@@ -59,5 +59,31 @@ class PersonalbueroTest {
     void Freelancer() {
         Mitarbeiter f1 = new Freelancer("Anna", Year.of(2001), Year.now(), 100.0, 10);
         IO.println(f1);
+    }
+
+    @Test
+    void testanzahltAlter() {
+        Personalbuero p1 = new Personalbuero();
+        Mitarbeiter f1 = new Angestellter("Jakob", Year.of(2001), Year.now());
+        p1.aufnehmen(f1);
+        IO.println(f1);
+        IO.println(p1.zaehleAlter(25));
+    }
+
+    @Test
+    void testkuendigenNameUndPOSUNDGEHALT() {
+        Personalbuero p1 = new Personalbuero();
+        Mitarbeiter f1 = new Angestellter("Jakob", Year.of(2001), Year.now());
+        Mitarbeiter f2 = new Freelancer("Alex",Year.of(2004),Year.now(),100,10);
+        p1.aufnehmen(f1);
+        p1.aufnehmen(f2);
+        IO.println(p1);
+        p1.kuendigen(0);
+        IO.println(p1);
+        p1.kuendigen("Alex");
+        IO.println(p1);
+        p1.aufnehmen(f1);
+        p1.aufnehmen(f2);
+        p1.gehaltsListe();
     }
 }

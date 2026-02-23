@@ -1,12 +1,10 @@
 package est.end;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Personalbuero {
 
-    private final LinkedList<Mitarbeiter> employees;
+    private final List<Mitarbeiter> employees;
 
     public Personalbuero() {
         employees = new LinkedList<>();
@@ -52,7 +50,7 @@ public class Personalbuero {
         return count;
     }
 
-    public float kuendigen(float gehalt){
+    public float kuendigenGeld(float gehalt){
         if (employees.isEmpty()) throw new IllegalArgumentException("Error: Keine Employees");
         Iterator<Mitarbeiter> iterator = employees.iterator();
         double gehaltSumme = 0.0;
@@ -66,6 +64,50 @@ public class Personalbuero {
         return (float) gehaltSumme;
     }
 
+   public int zaehleAlter(int alter) {
+        int anz = 0;
+        if (employees.isEmpty()) return -99;
+        if (alter < 15) throw new IllegalArgumentException("Alter muss mind. 15 sein");
+        for (Mitarbeiter ma : employees) {
+            if (ma.berechneAlter() == alter) anz++;
+        }
+        return anz;
+    }
+
+    public Mitarbeiter kuendigen(int pos) {
+        if (pos < 0 || pos >= employees.size()) throw new IllegalArgumentException("Fehler index ungültig");
+        return employees.remove(pos);
+
+    }
+
+    public boolean kuendigen(String name) {
+        if (employees.isEmpty() || name.isEmpty()) throw new IllegalArgumentException("Fehler null");
+        for (Mitarbeiter ma : employees) {
+            if (Objects.equals(ma.getName(), name)) {
+                return kuendigen(ma);
+            }
+        }
+        return true;
+    }
+
+    public boolean kuendigen(Mitarbeiter ma) {
+        if(ma == null) throw new IllegalArgumentException("Fehler: null");
+        return employees.remove(ma);
+    }
+
+    public void gehaltsListe() {
+     IO.println("Gehaltsliste: \n");
+     for (Mitarbeiter ma : employees) {
+         if (!employees.isEmpty()) {
+             IO.println(ma.getName());
+             IO.println(ma.berechneGehalt());
+         } else {
+             IO.println("Keine Mitarbeiter vorhanden!");
+         }
+     }
+        IO.println("Gehaltsumme: " + berechneGehaltsumme() + " EUR");
+
+    }
 
     @Override
     public String toString() {
