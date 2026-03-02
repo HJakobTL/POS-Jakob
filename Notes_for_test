@@ -1,0 +1,16 @@
+Wann sind Objekte gleich:
+
+Was ist abstract/extends/implement(Interface):
+    abstracte Klassen können nicht instanziert werden
+    abstracte Methoden erkennt man an zB public abstract int methode(); -> hat keinen Body (keine {})
+    
+Was ist ein Interface:
+    zB Interface Comparable
+    Hat nur EINE Funktion, in dem Fall: compareTo
+    Natürliche Ordnung ist mit compareTo
+    Werden implementiert (zB public abstract class Mitarbeiter implements Comparable<Mitarbeiter>)
+
+Was ist @Override:
+
+Was ist instanceof:
+

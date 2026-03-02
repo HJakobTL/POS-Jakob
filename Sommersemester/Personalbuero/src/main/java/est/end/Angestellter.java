@@ -8,6 +8,10 @@ public class Angestellter extends Mitarbeiter {
         super(name, gebJahr, eintrJahr);
     }
 
+    @Override
+    public double berechneGehalt() {
+        return 1500.0 * 50.0 * dienstAlter();
+    }
 
     @Override
     public String toString() {

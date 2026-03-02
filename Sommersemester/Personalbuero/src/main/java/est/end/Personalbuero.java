@@ -1,5 +1,6 @@
 package est.end;
 
+import java.time.Year;
 import java.util.*;
 
 public class Personalbuero {
@@ -50,18 +51,19 @@ public class Personalbuero {
         return count;
     }
 
-    public float kuendigenGeld(float gehalt){
+    public double kuendigenGeld(double gehalt){
         if (employees.isEmpty()) throw new IllegalArgumentException("Error: Keine Employees");
         Iterator<Mitarbeiter> iterator = employees.iterator();
         double gehaltSumme = 0.0;
+        Mitarbeiter ma;
         while(iterator.hasNext()) {
-            Mitarbeiter ma = iterator.next();
-            if (ma.berechneGehalt() > (double) gehalt) {
+            ma = iterator.next();
+            if (ma.berechneGehalt() > gehalt) {
                 gehaltSumme += ma.berechneGehalt();
                 iterator.remove();
             }
         }
-        return (float) gehaltSumme;
+        return gehaltSumme;
     }
 
    public int zaehleAlter(int alter) {
@@ -107,6 +109,50 @@ public class Personalbuero {
      }
         IO.println("Gehaltsumme: " + berechneGehaltsumme() + " EUR");
 
+    }
+
+    public boolean sortiereNachnamen() {
+        // if (employees.isEmpty()) return false;
+        employees.sort(null);
+        return true;
+    }
+
+    public int anzAngestellte() {
+        if (employees.isEmpty()) return -99;
+        int anzAngestellte = 0;
+        for (Mitarbeiter ma : employees) {
+            if (ma instanceof Angestellter) anzAngestellte++;
+        }
+        return anzAngestellte;
+    }
+
+    public int summeFreelancerStunden() {
+        if (employees.isEmpty()) return -99;
+        int sumStunden = 0;
+        for (Mitarbeiter ma : employees) {
+            if (ma instanceof Freelancer) sumStunden += ((Freelancer) ma).getStunden();
+        }
+        return sumStunden;
+    }
+
+    public Mitarbeiter getMitarbeiter(int pos) {
+        if(pos < 0 || pos >= employees.size()) return null;
+        return employees.get(pos);
+    }
+
+    public int kuendigenAlle(Year Jahr) {
+        if (Jahr == null || Jahr.isAfter(Year.now()) || employees.isEmpty()) return -99;
+        Iterator<Mitarbeiter> iterator = employees.iterator();
+        int anzGekuendigt = 0;
+        Mitarbeiter ma;
+        while (iterator.hasNext()){
+            ma = iterator.next();
+            if (iterator.next().getEintrJahr().equals(Jahr)) {
+                iterator.remove();
+                anzGekuendigt++;
+            }
+        }
+        return anzGekuendigt;
     }
 
     @Override

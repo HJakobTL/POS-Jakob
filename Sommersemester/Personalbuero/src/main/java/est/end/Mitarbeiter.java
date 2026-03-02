@@ -1,8 +1,9 @@
 package est.end;
 
 import java.time.Year;
+import java.util.Objects;
 
-public abstract class Mitarbeiter {
+public abstract class Mitarbeiter implements Comparable<Mitarbeiter>{
 
     private String name;
     private Year gebJahr;
@@ -56,10 +57,21 @@ public abstract class Mitarbeiter {
         return Year.now().getValue() - eintrJahr.getValue();
     }
 
-    public double berechneGehalt() {
-        int anzJahre = dienstAlter();
-        int fixGehalt = 1500;
-        return fixGehalt + (50*anzJahre);
+    public abstract double berechneGehalt();
+
+    @Override
+    public int compareTo(Mitarbeiter o) {
+        /*
+        if (o == null) throw new NullPointerException("Fehler: null");
+        if (o.getClass() != getClass()) throw new ClassCastException("Fehler: Falsche Klasse");
+        if (this.name.equals(o.name)) {
+            return 0;
+        }
+        else {
+
+        }
+        */
+        return name.compareTo(o.getName());
     }
 
     public double berechnePraemie() {
@@ -80,6 +92,19 @@ public abstract class Mitarbeiter {
             case 50 -> berechneGehalt()*7;
             default -> 0.0;
         };
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Mitarbeiter that = (Mitarbeiter) o;
+        return Objects.equals(name, that.name) && Objects.equals(gebJahr, that.gebJahr) && Objects.equals(eintrJahr, that.eintrJahr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gebJahr, eintrJahr);
     }
 
     @Override
