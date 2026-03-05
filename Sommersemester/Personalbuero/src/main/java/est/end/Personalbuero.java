@@ -155,6 +155,41 @@ public class Personalbuero {
         return anzGekuendigt;
     }
 
+    public void sortierenNachNamen() {
+        employees.sort(null);
+    }
+
+    public void sortierenNachAlter() {
+        employees.sort(new AlterComperator());
+    }
+
+    /*
+    Nicht so gute Variante
+    public void sortiereNachDienstAlter() {
+        employees.sort(new Comparator<Mitarbeiter>() {
+            @Override
+            public int compare(Mitarbeiter o1, Mitarbeiter o2) {
+                return Integer.compare(o1.dienstAlter(),o2.dienstAlter());
+            }
+        });
+    }
+     */
+
+    /* schon besser
+    public void sortiereNachDienstAlter() {
+        employees.sort((o1, o2) -> Integer.compare(o1.dienstAlter(),o2.dienstAlter()));
+    }
+     */
+
+    // Am besten
+    public void sortiereNachDienstAlter() {
+        employees.sort(Comparator.comparing(Mitarbeiter::dienstAlter));
+    }
+
+    public void sortiereNachGehalt() {
+        employees.sort(((o1, o2) -> Double.compare(o1.berechneGehalt(),o2.berechneGehalt())));
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Personalbuero:\n");
