@@ -1,6 +1,7 @@
 package est.end;
 
 import java.time.Year;
+import java.util.Objects;
 
 public class Wetterstation extends Messstation {
 
@@ -22,12 +23,28 @@ public class Wetterstation extends Messstation {
 
     @Override
     public double berechneUmweltIndex() {
-        return getMesswert() + (temperatur * 0.5);
+        if (getMesswert() > temperatur) {
+            return getMesswert() + (temperatur * 0.5);
+        }
+        return getMesswert();
     }
 
     @Override
     public String getStationTyp() {
         return "Wetterstation";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Wetterstation that = (Wetterstation) o;
+        return Double.compare(temperatur, that.temperatur) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), temperatur);
     }
 
     @Override

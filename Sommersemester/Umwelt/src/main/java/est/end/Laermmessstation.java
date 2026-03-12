@@ -1,6 +1,7 @@
 package est.end;
 
 import java.time.Year;
+import java.util.Objects;
 
 public class Laermmessstation extends Messstation {
 
@@ -16,7 +17,7 @@ public class Laermmessstation extends Messstation {
     }
 
     public void setMaxErlaubterPegel(double maxErlaubterPegel) {
-        if (maxErlaubterPegel < 0) throw new IllegalArgumentException("Darf nicht kleiner 0 sein");
+        if (maxErlaubterPegel <= 0) throw new IllegalArgumentException("Darf nicht kleiner 0 sein");
         this.maxErlaubterPegel = maxErlaubterPegel;
     }
 
@@ -28,6 +29,19 @@ public class Laermmessstation extends Messstation {
     @Override
     public String getStationTyp() {
         return "Laermmessstation";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Laermmessstation that = (Laermmessstation) o;
+        return Double.compare(maxErlaubterPegel, that.maxErlaubterPegel) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), maxErlaubterPegel);
     }
 
     @Override

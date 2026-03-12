@@ -13,17 +13,21 @@ public class UmweltBehoerde {
     }
 
     public boolean addMessstation(Messstation m) {
-        if (m == null || messstationen.contains(m)) throw new IllegalArgumentException("Fehler: null oder schon vorhanden");
+        if (m == null || messstationen.contains(m)) return false;
         return messstationen.add(m);
     }
 
     public double berechneDurchschnittMesswert() {
-        return berechneDurchschnittLaermmessertstation() +
-                berechneDurchschnittLuftmessstation() +
-                berechneDurchschnittWetterstation();
+        if (messstationen.isEmpty()) return 0;
+        double sum = 0;
+        for (Messstation m : messstationen) {
+            sum += m.getMesswert();
+        }
+        return sum / messstationen.size();
     }
 
     private double berechneDurchschnittProStation(String stationsName) {
+        if (messstationen.isEmpty()) return 0;
         double sumMesswerte = 0;
         int anzStationen = 0;
         for (Messstation messstation: messstationen) {
@@ -48,7 +52,7 @@ public class UmweltBehoerde {
     }
 
     public void sortiereMessstaionen() {
-        messstationen.sort(Messstation::compareTo);
+        messstationen.sort(null);
     }
 
     public void zeigAlleStationen() {
@@ -85,7 +89,7 @@ public class UmweltBehoerde {
         }
         IO.println("Luftmessstation: " + anzLuft);
         IO.println("Laermmessstation: " + anzLaerm);
-        IO.println("Wetterstation" + anzWetter);
+        IO.println("Wetterstation: " + anzWetter);
     }
 
     public int zaehleAlleSationenMitZuHohemWert(double grenzwerte) {
@@ -102,23 +106,19 @@ public class UmweltBehoerde {
     }
 
     public boolean removeErsteStationNachStandort(String standort) {
-        Iterator<Messstation> iterator = messstationen.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().getStationTyp().equals(standort)) {
-                iterator.remove();
-                return true;
-            }
+        for (Messstation m : messstationen) {
+            if (m.getStandort().equals(standort)) return messstationen.remove(m);
         }
         return false;
     }
 
     public ArrayList<Messstation> removeAlleStationenAelterAls(int alterInJahren) {
-        ArrayList<Messstation> delStationen = new ArrayList<Messstation>();
+        ArrayList<Messstation> delStationen = new ArrayList<>();
         Iterator<Messstation> iterator = messstationen.iterator();
         Messstation mess;
         while (iterator.hasNext()) {
             mess = iterator.next();
-            if (Year.now().minusYears(alterInJahren).isBefore(mess.getInstallationsJahr())) {
+            if (Year.now().getValue() - mess.getInstallationsJahr().getValue() > alterInJahren) {
                 delStationen.add(mess);
                 iterator.remove();
             }

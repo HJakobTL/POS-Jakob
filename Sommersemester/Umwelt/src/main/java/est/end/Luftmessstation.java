@@ -1,6 +1,7 @@
 package est.end;
 
 import java.time.Year;
+import java.util.Objects;
 
 public class Luftmessstation extends Messstation {
 
@@ -16,7 +17,7 @@ public class Luftmessstation extends Messstation {
     }
 
     public void setFeinstaubGrenzwert(double feinstaubGrenzwert) {
-        if (feinstaubGrenzwert < 0) throw new IllegalArgumentException("Muss größer 0 sein");
+        if (feinstaubGrenzwert <= 0) throw new IllegalArgumentException("Muss größer 0 sein");
         this.feinstaubGrenzwert = feinstaubGrenzwert;
     }
 
@@ -28,6 +29,19 @@ public class Luftmessstation extends Messstation {
     @Override
     public String getStationTyp() {
         return "Luftmessstation";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Luftmessstation that = (Luftmessstation) o;
+        return Double.compare(feinstaubGrenzwert, that.feinstaubGrenzwert) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), feinstaubGrenzwert);
     }
 
     @Override

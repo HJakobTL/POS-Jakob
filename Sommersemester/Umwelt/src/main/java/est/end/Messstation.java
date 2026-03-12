@@ -1,9 +1,9 @@
 package est.end;
 
 import java.time.Year;
-import java.time.temporal.TemporalAmount;
+import java.util.Objects;
 
-public abstract class Messstation {
+public abstract class Messstation implements Comparable<Messstation>{
 
     private String standort;
     private Year installationsJahr;
@@ -20,7 +20,7 @@ public abstract class Messstation {
     }
 
     public void setStandort(String standort) {
-        if (standort.isBlank()) throw new IllegalArgumentException("Fehler: Null");
+        if (standort == null || standort.isBlank()) throw new IllegalArgumentException("Fehler: Null");
         this.standort = standort;
     }
 
@@ -29,7 +29,7 @@ public abstract class Messstation {
     }
 
     public void setInstallationsJahr(Year installationsJahr) {
-        if (installationsJahr.isAfter(Year.of(1880))) throw new IllegalArgumentException("Darf nicht kleiner Jahr 1880 sein");
+        if (installationsJahr.isBefore(Year.of(1880))) throw new IllegalArgumentException("Darf nicht kleiner Jahr 1880 sein");
         this.installationsJahr = installationsJahr;
     }
 
@@ -47,6 +47,19 @@ public abstract class Messstation {
 
     public abstract String getStationTyp();
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Messstation that = (Messstation) o;
+        return Double.compare(messwert, that.messwert) == 0 && Objects.equals(standort, that.standort) && Objects.equals(installationsJahr, that.installationsJahr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(standort, installationsJahr, messwert);
+    }
+
+    @Override
     public int compareTo(Messstation other) {
         return Double.compare(other.messwert,this.messwert);
     }
