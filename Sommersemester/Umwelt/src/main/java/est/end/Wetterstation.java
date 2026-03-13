@@ -49,8 +49,6 @@ public class Wetterstation extends Messstation {
 
     @Override
     public String toString() {
-        return "Wetterstation{" +
-                "temperatur=" + temperatur +
-                "} " + super.toString();
+        return super.toString() + ", Temperatur: " + getTemperatur();
     }
 }

@@ -75,6 +75,26 @@ public class UmweltBehoerde {
         zeigeStation("Laermmessstation");
     }
 
+
+    public void zeigeStationenMitGrenzwertUeberschreitung() {
+        double ueberschritten = 0.0;
+        for (Messstation m : messstationen) {
+             if (m instanceof Luftmessstation && ((Luftmessstation) m).getFeinstaubGrenzwert() < m.getMesswert()) {
+                 ueberschritten = m.getMesswert() - ((Luftmessstation) m).getFeinstaubGrenzwert();
+                 IO.println(m + " Ueberschreitung um: " + ueberschritten);
+             }
+            if (m instanceof Laermmessstation && ((Laermmessstation) m).getMaxErlaubterPegel() < m.getMesswert()) {
+                ueberschritten = m.getMesswert() -  ((Laermmessstation) m).getMaxErlaubterPegel();
+                IO.println(m + " Ueberschreitung um: " + ueberschritten);
+            }
+            if (m instanceof Wetterstation && ((Wetterstation) m).getTemperatur() < m.getMesswert()) {
+                ueberschritten = m.getMesswert() - ((Wetterstation) m).getTemperatur();
+                IO.println(m + " Ueberschreitung um: " + ueberschritten);
+            }
+        }
+    }
+
+
     public void zaehleStationstypen() {
         int anzLuft = 0;
         int anzLaerm = 0;
@@ -128,8 +148,10 @@ public class UmweltBehoerde {
 
     @Override
     public String toString() {
-        return "UmweltBehoerde{" +
-                "messstationen=" + messstationen +
-                '}';
+        StringBuilder sb = new StringBuilder("Messstationen: ");
+        for (Messstation m : messstationen) {
+            sb.append("\n").append(m.toString());
+        }
+        return sb.toString();
     }
 }

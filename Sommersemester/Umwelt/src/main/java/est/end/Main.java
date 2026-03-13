@@ -238,13 +238,13 @@ public class Main {
         Wetterstation wetterstation2 = new Wetterstation("Leoben", Year.now().minusYears(1), 40.1, 40);
         System.out.println(umweltBehoerde);
         System.out.println();
-        //umweltBehoerde.zeigeStationenMitGrenzwertUeberschreitung();
+        umweltBehoerde.zeigeStationenMitGrenzwertUeberschreitung();
         System.out.println();
         umweltBehoerde.addMessstation(luftmessstation2);
         umweltBehoerde.addMessstation(laermmessstation2);
         System.out.println(umweltBehoerde);
         System.out.println();
-        //umweltBehoerde.zeigeStationenMitGrenzwertUeberschreitung();
+        umweltBehoerde.zeigeStationenMitGrenzwertUeberschreitung();
         System.out.println();
         umweltBehoerde.addMessstation(luftmessstation);
         umweltBehoerde.addMessstation(laermmessstation);
@@ -252,7 +252,7 @@ public class Main {
         umweltBehoerde.addMessstation(wetterstation2);
         System.out.println(umweltBehoerde);
         System.out.println();
-        //umweltBehoerde.zeigeStationenMitGrenzwertUeberschreitung();
+        umweltBehoerde.zeigeStationenMitGrenzwertUeberschreitung();
         System.out.println();
 
         /*

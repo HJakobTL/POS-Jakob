@@ -66,11 +66,9 @@ public abstract class Messstation implements Comparable<Messstation>{
 
     @Override
     public String toString() {
-        return "Messstation{" +
-                "standort='" + standort + '\'' +
-                ", installationsJahr=" + installationsJahr +
-                ", messwert=" + messwert +
-                ", stationsTyp=" + getStationTyp() +
-                '}';
+        return "Messtation: " + "Standort: '" + standort + '\'' +
+                ", Installationsjahr: " + installationsJahr +
+                ", Messwert: " + messwert +
+                ", Stationstyp: " + getClass().getSimpleName();
     }
 }

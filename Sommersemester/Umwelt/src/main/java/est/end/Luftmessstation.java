@@ -46,8 +46,6 @@ public class Luftmessstation extends Messstation {
 
     @Override
     public String toString() {
-        return "Luftmessstation{" +
-                "feinstaubGrenzwert=" + feinstaubGrenzwert +
-                "} " + super.toString();
+        return super.toString() + ", Feinstaubgrenzwert: " + getFeinstaubGrenzwert();
     }
 }

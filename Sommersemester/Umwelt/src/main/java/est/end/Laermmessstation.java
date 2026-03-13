@@ -46,8 +46,6 @@ public class Laermmessstation extends Messstation {
 
     @Override
     public String toString() {
-        return "Laermmessstation{" +
-                "maxErlaubterPegel=" + maxErlaubterPegel +
-                "} " + super.toString();
+        return super.toString() + ", maximal erlaubter Pegel: " + getMaxErlaubterPegel();
     }
 }
