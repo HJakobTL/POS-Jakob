@@ -1,20 +1,19 @@
 package est.end;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Notizen {
 
-    List<String> notizen;
+    private final List<String> notizen;
 
     public Notizen() {
         notizen = new ArrayList<>(); {
         }
     }
 
-    public boolean notizHinzufuegen(String notiz) {
-        if (!checkNotiz(notiz)) throw new IllegalArgumentException("Fehler: null oder leer");
+    public boolean notizHinzufuegen(String notiz) throws NotizException {
+        if (checkNotiz(notiz)) throw new NotizException("Fehler: null oder leer");
         if (this.notizen.contains(notiz)) return false;
         return notizen.add(notiz);
     }

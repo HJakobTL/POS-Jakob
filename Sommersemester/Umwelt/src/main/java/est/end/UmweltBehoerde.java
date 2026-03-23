@@ -77,20 +77,21 @@ public class UmweltBehoerde {
 
 
     public void zeigeStationenMitGrenzwertUeberschreitung() {
-        double ueberschritten = 0.0;
+        double ueberschritten;
         for (Messstation m : messstationen) {
              if (m instanceof Luftmessstation && ((Luftmessstation) m).getFeinstaubGrenzwert() < m.getMesswert()) {
                  ueberschritten = m.getMesswert() - ((Luftmessstation) m).getFeinstaubGrenzwert();
                  IO.println(m + " Ueberschreitung um: " + ueberschritten);
              }
-            if (m instanceof Laermmessstation && ((Laermmessstation) m).getMaxErlaubterPegel() < m.getMesswert()) {
+            else if (m instanceof Laermmessstation && ((Laermmessstation) m).getMaxErlaubterPegel() < m.getMesswert()) {
                 ueberschritten = m.getMesswert() -  ((Laermmessstation) m).getMaxErlaubterPegel();
                 IO.println(m + " Ueberschreitung um: " + ueberschritten);
             }
-            if (m instanceof Wetterstation && ((Wetterstation) m).getTemperatur() < m.getMesswert()) {
+            else if (m instanceof Wetterstation && ((Wetterstation) m).getTemperatur() < m.getMesswert()) {
                 ueberschritten = m.getMesswert() - ((Wetterstation) m).getTemperatur();
                 IO.println(m + " Ueberschreitung um: " + ueberschritten);
             }
+            else IO.println("Keine Ueberschreitung vorhanden!");
         }
     }
 

@@ -38,7 +38,6 @@ public abstract class Animal extends Shelter implements Comparable<Animal> {
 
     // TODO
     public int compareTo(Animal animal){
-
         return 0;
     }
 
