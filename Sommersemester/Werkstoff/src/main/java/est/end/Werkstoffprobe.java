@@ -62,7 +62,6 @@ public abstract class Werkstoffprobe implements Comparable<Werkstoffprobe>{
 
     public abstract double berechneQualitaetsIndex();
 
-    //TODO
     public int compareTo(Werkstoffprobe other) {
         if (this.bezeichnung.equals(other.bezeichnung)) {
             this.id.compareTo(other.id);
