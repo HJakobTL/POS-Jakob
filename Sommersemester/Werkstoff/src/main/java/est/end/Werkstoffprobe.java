@@ -64,7 +64,7 @@ public abstract class Werkstoffprobe implements Comparable<Werkstoffprobe>{
 
     public int compareTo(Werkstoffprobe other) {
         if (this.bezeichnung.equals(other.bezeichnung)) {
-            this.id.compareTo(other.id);
+            return this.id.compareTo(other.id);
         }
         return this.bezeichnung.compareTo(other.bezeichnung);
     }
@@ -73,12 +73,12 @@ public abstract class Werkstoffprobe implements Comparable<Werkstoffprobe>{
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Werkstoffprobe that = (Werkstoffprobe) o;
-        return Double.compare(dichte, that.dichte) == 0 && Double.compare(masse, that.masse) == 0 && Objects.equals(id, that.id) && Objects.equals(bezeichnung, that.bezeichnung);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, bezeichnung, dichte, masse);
+        return Objects.hashCode(id);
     }
 
     @Override
