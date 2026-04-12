@@ -23,14 +23,23 @@ public class Main {
             BetriebsZertifikat b1 = new BetriebsZertifikat("Z-2026-001","GreenCity Festival",20.5, 78,10);
             System.out.println(b1);
             System.out.println("-------------------");
-            ProduktZertifikat p1 = new ProduktZertifikat("Z-2026-001"," GreenCity Festival T-Shirt",20.5,78,20,35);
+            ProduktZertifikat p1 = new ProduktZertifikat("Z-2026-002"," GreenCity Festival T-Shirt",20.5,78,20,35);
             System.out.println(p1);
             System.out.println("--------------------");
             z1.addZertifikat(b1);
             z1.addZertifikat(p1);
             z1.druckeAlle();
             System.out.println("--------------------");
-            for (UmweltZertifikat u : z1.listeTopNachhaltigkeitsScore()) System.out.println(u);
+            //for (UmweltZertifikat u : z1.listeTopNachhaltigkeitsScore()) System.out.println(u);
+            //System.out.println("--------------------");
+            System.out.println("HALLO");
+            UmweltZertifikat u2 = z1.findeMitId("Z-2026-002");
+            System.out.println(u2);
+            System.out.println("--------------------");
+            z1.druckeScoreListe();
+            z1.druckeCO2EffizienzListe(1);
+
+
         } catch (UmweltProjektException e) {
             System.out.print("Unerwarteter Fehler");
         }

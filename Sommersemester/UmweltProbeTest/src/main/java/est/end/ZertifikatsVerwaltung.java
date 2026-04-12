@@ -34,7 +34,23 @@ public class ZertifikatsVerwaltung  {
     }
 
     public void druckeCO2EffizienzListe(double maxErlaubterCO2) {
+        for (UmweltZertifikat z : zertifikate) {
+            try {
+                System.out.println(z.getId() + " | " + z.getName() + " | CO2-Effizienz: " + z.berechneCO2Effizienz(maxErlaubterCO2));
+            } catch (UmweltProjektException e) {
+                System.out.println("Fehler bei Zertifikat " + z.getId() + ": Der maximale CO2-Wert muss größer als 0 sein");
+            }
+        }
+    }
 
+    public UmweltZertifikat findeMitId(String id) throws UmweltProjektException {
+        if (id == null || id.isEmpty()) throw new UmweltProjektException("Fehler id");
+        for (UmweltZertifikat z : zertifikate) {
+            if (z.getId().equals(id)) {
+                return z;
+            }
+        }
+        throw new UmweltProjektException("Kein UmweltZertifikat gefunden");
     }
 
     public List<UmweltZertifikat> listeTopNachhaltigkeitsScore() throws UmweltProjektException {
@@ -47,6 +63,17 @@ public class ZertifikatsVerwaltung  {
             topList.add(zertifikate.get(i));
         }
         return topList;
+    }
+
+    public List<UmweltZertifikat> listeFlopNachhaltigkeitsScore() throws UmweltProjektException {
+        if (zertifikate.size() < 10) throw new UmweltProjektException("Zu wenige Zeritfikate Vorhanden");
+        zertifikate.sort(null);
+        int anzahlFlop10Prozent = zertifikate.size() / 10;
+        ArrayList<UmweltZertifikat> flopList = new ArrayList<>();
+        for (int i = 0; i < anzahlFlop10Prozent; i++) {
+            flopList.add(zertifikate.get(i));
+        }
+        return flopList;
     }
 
 }
