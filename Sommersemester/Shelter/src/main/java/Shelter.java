@@ -67,9 +67,8 @@ public class Shelter {
         animals.sort(null);
     }
 
-    // TODO
     public void sortAnimalsByAge() {
-
+        animals.sort(new AnimalSortByAge() );
     }
 
     @Override

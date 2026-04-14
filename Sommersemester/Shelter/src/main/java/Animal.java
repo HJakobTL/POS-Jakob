@@ -1,4 +1,3 @@
-import java.util.Comparator;
 
 public abstract class Animal extends Shelter implements Comparable<Animal> {
 
@@ -36,9 +35,8 @@ public abstract class Animal extends Shelter implements Comparable<Animal> {
         IO.println(this.name + " eats!");
     }
 
-    // TODO
     public int compareTo(Animal animal){
-        return 0;
+        return this.getName().compareTo(animal.getName());
     }
 
     @Override
