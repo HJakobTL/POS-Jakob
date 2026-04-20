@@ -1,29 +1,31 @@
 package est.end;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Notizen {
 
-    private final List<String> notizen;
+    private List<String> notizen;
+
+    //"Brot einkaufen"
+    //"Video über Java-Streams ansehen"
+    //"Geschenk für Petra besorgen"
 
     public Notizen() {
-        notizen = new ArrayList<>(); {
-        }
+        notizen = new ArrayList<>();
     }
 
     public boolean notizHinzufuegen(String notiz) throws NotizException {
-        if (checkNotiz(notiz)) throw new NotizException("Fehler: null oder leer");
-        if (this.notizen.contains(notiz)) return false;
-        return notizen.add(notiz);
-    }
-
-    public void ausgebenNotizen() {
-        if (notizen.isEmpty()) IO.print("Keine Notizen vorhanden");
-        IO.println("Meine Notizen: ");
-        for (String notiz : notizen) {
-            IO.println(notiz);
+        if (notiz == null || notiz.isBlank()) {
+            throw new NotizException("Fehler: null oder leer");
         }
+        if (this.notizen.contains(notiz)) {
+            return false;
+        }
+        return notizen.add(notiz);
     }
 
     public void sortierenAlphabetisch() {
@@ -31,25 +33,77 @@ public class Notizen {
     }
 
     public void sortierenNachLaengeAbsteigend() {
-        notizen.sort(new LaengeCompertator().reversed());
+        //Comparator<String> nachLaengeAbsteigendComparator = new LaengeComparator().reversed();
+        notizen.sort(new LaengeComparator().reversed());
     }
 
-    public void sortierenNachLaengeAufsteigend() {
-        notizen.sort(new LaengeCompertator());
+    public void sortierenNachDerLaengeAufsteigend() {
+        notizen.sort(new LaengeComparator());
     }
 
-    public boolean checkNotiz(String notiz) {
+    public boolean notizEntfernen(String notiz) throws NotizException {
+        if (!checkNotiz(notiz)) {
+            throw new NotizException("Fehler: notiz ungültig");
+        }
+        return notizen.remove(notiz);
+    }
+
+    private boolean checkNotiz(String notiz) {
         return notiz != null && !notiz.isBlank();
     }
 
-    public boolean notizEntfernen(String notiz) {
-        if (!checkNotiz(notiz)) throw new IllegalArgumentException("Fehler: null oder leer");
-        return notizen.remove(notiz);
+    public void ausgebenNotizen() {
+        if (notizen.isEmpty()) {
+            System.out.println("Keine Notizen vorhanden");
+        } else {
+            System.out.println("Meine Notizen: ");
+            for (String notiz : notizen) {
+                System.out.println(notiz);
+            }
+        }
+    }
+
+    // files
+    public void save() throws NotizException {
+        String filepath = "src/main/java/resources/notizen.ser";
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
+            oos.writeObject(notizen);
+        } catch (FileNotFoundException e) {
+            throw new NotizException("Datei " + filepath + " nicht gefunden " + e.getMessage());
+        } catch (IOException e) {
+            throw new NotizException("I/O-Problem mit Datei " + filepath + " " + e.getMessage());
+        }
+    }
+
+    public void load() throws NotizException {
+        String filepath = "src/main/java/resources/notizen.ser";
+
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath))) {
+
+            List<?> notizenLoad = (List<?>) ois.readObject();
+
+            ArrayList<String> notizenBackUp = new ArrayList<>();
+            Collections.copy(notizenBackUp, notizen);
+
+            notizen.clear();
+            for (Object o : notizenLoad) {
+                if (o instanceof String) {
+                    notizen.add((String) o);
+                } else {
+                    // Ausganszustand herstellen
+                    notizen = notizenBackUp;
+                    throw new NotizException("Fehler mit den Notizen in " + filepath + ", andere Informationen gefunden");
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new NotizException("Datei " + filepath + " nicht gefunden " + e.getMessage());
+        } catch (IOException e) {
+            throw new NotizException("I/O-Problem mit Datei " + filepath + " " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new NotizException("Keine Notizen in der Datein " + filepath + " gefunden " + e.getMessage());
+        }
 
     }
-    public boolean notizEntfernenIndex(int index) {
-        if (index < 0 || index > notizen.size()) throw new IllegalArgumentException("Fehler");
-        notizen.remove(index);
-        return true;
-    }
+
 }

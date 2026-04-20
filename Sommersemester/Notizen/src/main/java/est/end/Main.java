@@ -1,50 +1,99 @@
 package est.end;
 
+
 public class Main {
     static void main() {
-
-        Notizen n1 = new Notizen();
-
-        //n1.ausgebenNotizen();
+       /*
         try {
-            IO.println(n1.notizHinzufuegen("Gym auslassen"));
-            IO.println(n1.notizHinzufuegen("Alex einkaufen"));
-            IO.println(n1.notizHinzufuegen("Alex einkaufen"));
-            IO.println(n1.notizHinzufuegen("Glüklich sein"));
-            IO.println(n1.notizHinzufuegen("Chips essen"));
+            Notizen notizen = new Notizen();
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            System.out.println(notizen.notizHinzufuegen("Brot einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Brot einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Anna anrufen"));
+            System.out.println(notizen.notizHinzufuegen("Film Van Damme streamen"));
+            System.out.println(notizen.notizHinzufuegen("Chips einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Ins Gym gehen"));
+
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.sortierenAlphabetisch();
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            System.out.println(notizen.notizEntfernen("Ins Gym gehen"));
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.sortierenNachLaengeAbsteigend();
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.notizHinzufuegen("Perl lernen");
+            notizen.notizHinzufuegen("Java lernen");
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.sortierenAlphabetisch();
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.sortierenNachDerLaengeAufsteigend();
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.notizHinzufuegen("Zumba lernen");
+            notizen.notizHinzufuegen("AM lernen");
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.sortierenNachDerLaengeAufsteigend();
+            notizen.ausgebenNotizen();
+            System.out.println();
         } catch (NotizException e) {
-            IO.println("Fehler: unerwartete Exception: " +  e.getMessage());
+            System.out.println("FEHLER: unerwartete Exception: " + e.getMessage());
+            //System.exit(0);  // NOOOOOOOOO GOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!
         }
+//        finally {
+//            System.out.println("Dieser Codeblock wird IMMER ausgeführt");
+//        }
+        */
 
+//          testSave();
+//        testLoad();
 
-        n1.ausgebenNotizen();
-
-        n1.sortierenAlphabetisch();
-        n1.ausgebenNotizen();
-
-        /*n1.notizEntfernenIndex(0);
-        n1.notizEntfernen("Chips essen");
-        n1.ausgebenNotizen();
-         */
-
-        n1.sortierenNachLaengeAbsteigend();
-        n1.ausgebenNotizen();
 
         try {
-            n1.notizHinzufuegen("Java verkaufen");
-            n1.notizHinzufuegen("Perl verkaufen");
-            n1.notizHinzufuegen("Curl verkaufen");
-        } catch (NotizException e){
-            IO.println("Fehler: unerwartete Exception: " +  e.getMessage());
-        } finally {
-            IO.println("Dieser Code wird immer ausgeführt");
+            Notizen notizen = new Notizen();
+
+            System.out.println(notizen.notizHinzufuegen("Brot einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Brot einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Anna anrufen"));
+            System.out.println(notizen.notizHinzufuegen("Film Van Damme streamen"));
+            System.out.println(notizen.notizHinzufuegen("Chips einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Ins Gym gehen"));
+            notizen.ausgebenNotizen();
+            System.out.println();
+            notizen.save();
+            System.out.println("Notizen wurden gespeichert in notizen.ser");
+            System.out.println();
+        } catch (NotizException e) {
+            System.out.println("Unerwartete Exception: " + e.getMessage());
         }
 
-        n1.sortierenAlphabetisch();
-        n1.ausgebenNotizen();
-
-        n1.sortierenNachLaengeAufsteigend();
-        n1.ausgebenNotizen();
-
+        try {
+            Notizen notizen = new Notizen();
+            notizen.ausgebenNotizen();
+            System.out.println();
+            notizen.load();
+            System.out.println("Notizen wurden geladen aus notizen.ser");
+            System.out.println();
+            notizen.ausgebenNotizen();
+            System.out.println();
+        } catch (NotizException e) {
+            System.out.println("Unerwartete Exception: " + e.getMessage());
+        }
     }
 }

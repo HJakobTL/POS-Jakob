@@ -1,16 +1,15 @@
-package est.end;
+package at.spengergasse;
 
 import java.time.Year;
 
-public class Angestellter extends Mitarbeiter {
-   
-    public Angestellter(String name, Year gebJahr, Year eintrJahr) {
+public class Angestellter extends Mitarbeiter{
+    public Angestellter(String name, Year gebJahr, Year eintrJahr) throws PersonalException {
         super(name, gebJahr, eintrJahr);
     }
 
     @Override
     public double berechneGehalt() {
-        return 1500.0 * 50.0 * dienstAlter();
+        return 1500.0 + 50.0*berechneDienstalter();
     }
 
     @Override

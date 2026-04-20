@@ -5,5 +5,7 @@ public class NotizException extends Exception {
         super(message);
     }
 
-
+    public NotizException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
