@@ -3,7 +3,7 @@ package est.end;
 
 public class Main {
     static void main() {
-       /*
+
         try {
             Notizen notizen = new Notizen();
             notizen.ausgebenNotizen();
@@ -59,12 +59,71 @@ public class Main {
 //        finally {
 //            System.out.println("Dieser Codeblock wird IMMER ausgeführt");
 //        }
-        */
 
-//          testSave();
-//        testLoad();
+        //testSave();
+        //testLoad();
+        //testExportNotizen();
+        //testExportNotizenLeer();
+        testImportNotizen();
+    }
+
+    private static void testImportNotizen() {
+        try {
+            Notizen notizen = new Notizen();
+            notizen.ausgebenNotizen();
+            System.out.println();
+
+            notizen.importNotizen();
+            System.out.println();
+
+            System.out.println("Anzahl der gültigen Notizen: " + notizen.anzahlNotizen());
+            System.out.println(notizen);
+            System.out.println();
+        } catch (NotizException e) {
+            System.out.println("Unerwartete Exception: " + e.getMessage());
+        }
+    }
+
+    private static void testExportNotizen() {
+        try {
+            Notizen notizen = new Notizen();
+
+            System.out.println(notizen.notizHinzufuegen("Brot einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Brot einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Anna anrufen"));
+            System.out.println(notizen.notizHinzufuegen("Film Van Damme streamen"));
+            System.out.println(notizen.notizHinzufuegen("Chips einkaufen"));
+            System.out.println(notizen.notizHinzufuegen("Ins Gym gehen"));
+            notizen.ausgebenNotizen();
+            System.out.println();
+            notizen.exportNotizen();
+            System.out.println("Notizen wurden exportiert nach exportNotizen.txt");
+            System.out.println();
+            System.out.println(notizen.toCSVString()); // zum Testen
+            System.out.println();
+
+        } catch (NotizException e) {
+            System.out.println("Unerwartete Exception: " + e.getMessage());
+        }
+    }
 
 
+    private static void testExportNotizenLeer() {
+        try {
+            Notizen notizen = new Notizen();
+
+            notizen.ausgebenNotizen();
+            System.out.println();
+            notizen.exportNotizen();
+            System.out.println("Notizen wurden exportiert nach exportNotizen.txt");
+            System.out.println();
+        } catch (NotizException e) {
+            System.out.println("Unerwartete Exception: " + e.getMessage());
+        }
+    }
+
+
+    private static void testSave() {
         try {
             Notizen notizen = new Notizen();
 
@@ -82,7 +141,10 @@ public class Main {
         } catch (NotizException e) {
             System.out.println("Unerwartete Exception: " + e.getMessage());
         }
+    }
 
+
+    private static void testLoad() {
         try {
             Notizen notizen = new Notizen();
             notizen.ausgebenNotizen();

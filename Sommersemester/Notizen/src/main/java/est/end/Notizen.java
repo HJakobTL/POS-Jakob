@@ -1,6 +1,7 @@
 package est.end;
 
 import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,7 +21,7 @@ public class Notizen {
 
     public boolean notizHinzufuegen(String notiz) throws NotizException {
         if (notiz == null || notiz.isBlank()) {
-            throw new NotizException("Fehler: null oder leer");
+            throw new NotizException("Fehler bei notizHinzufuegen: null oder leer");
         }
         if (this.notizen.contains(notiz)) {
             return false;
@@ -61,6 +62,10 @@ public class Notizen {
                 System.out.println(notiz);
             }
         }
+    }
+
+    public int anzahlNotizen() {
+        return notizen.size();
     }
 
     // files
@@ -105,5 +110,66 @@ public class Notizen {
         }
 
     }
+
+    public void exportNotizen() throws NotizException {
+        String filepath = "src/main/java/resources/exportNotizen.txt";
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))) {
+            bw.write(this.toString());
+        } catch (IOException e) {
+            throw new NotizException("Fehler beim Export " + e.getMessage());
+        }
+    }
+
+    public String toCSVString() {
+        String delimiter = ";";
+        StringBuilder sb = new StringBuilder();
+        for (String s : notizen) {
+            sb.append(s).append(delimiter);
+        }
+        return sb.toString();
+    }
+
+    public void importNotizen() throws NotizException {
+        String filepath = "src/main/java/resources/importNotizen.txt";
+        try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line =  br.readLine();
+            if (line != null) {
+                line.trim();
+                String[] lineSplit = line.split(";");
+                if (lineSplit.length > 0) {
+                    notizen.clear(); // risiko Variante -> notizen.bak (Kopie der Datei) bzw Notizen in ein .bak file geben
+                    int linecount = 0;
+                    for (String notiz : lineSplit) {
+                        linecount++;
+                        if (notiz != null && !notiz.isBlank()) {
+                            notizHinzufuegen(notiz.trim());
+                        } else {
+                            // evtl. Logging
+                            System.out.println("Die Notiz an der POS. " + linecount +  " ist leer");
+                        }
+                    }
+                } else throw new NotizException("Datei " + filepath + " hat keine Infos für uns");
+
+            } else throw new NotizException("File ist leer (" + filepath + ")");
+
+        } catch (FileNotFoundException e) {
+            throw new NotizException("Fehler beim lesen der Datei: " + filepath + " " + e.getMessage());
+        } catch (IOException e) {
+            throw new NotizException("I/O Fehler beim lesen der Datei: " + e.getMessage());
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Notizen: ").append("\n");
+        if (notizen.isEmpty()) sb.append("Keine Notizen vorhanden");
+        for (String notiz : notizen) {
+            sb.append(notiz).append("\n");
+        }
+        return sb.toString();
+    }
+
 
 }
