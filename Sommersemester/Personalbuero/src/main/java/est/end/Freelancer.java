@@ -18,6 +18,22 @@ public class Freelancer extends Mitarbeiter{
         setStunden(10);
     }
 
+    public Freelancer(String line) throws PersonalException {
+        super(line);
+        if (line != null && !line.isBlank()) {
+            String[] token = line.trim().split(";");
+            if (token.length == 6) {
+                try {
+                    setStundenSatz(Double.parseDouble(token[4].trim()));
+                    setStunden(Integer.parseInt(token[5].trim()));
+                } catch (NumberFormatException e) {
+                    throw new PersonalException("Fehler bei Arzt mit line: Stunden/Fixum ungueltig" + line);
+                }
+            } else throw new PersonalException("Fehler bei Arzt, line ist ungueltig" + line);
+        }
+
+    }
+
     public double getStundenSatz() {
         return stundenSatz;
     }
@@ -63,6 +79,14 @@ public class Freelancer extends Mitarbeiter{
         result = 31 * result + stunden;
         return result;
     }
+
+    public String toCSVString() throws PersonalException {
+        String delimiter = ";";
+        return super.toCSVString() + delimiter +
+                stundenSatz + delimiter +
+                stunden;
+    }
+
 
     @Override
     public String toString() {

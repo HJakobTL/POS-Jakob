@@ -13,6 +13,7 @@ public class Haushaltspolizze extends Vertrag{
         if(quadratmeter <= 0.0) {
             throw new VersicherungException("Fehler: quadratmeter müssen größer als 0.0 sein");
         }
+        this.quadratmeter = quadratmeter;
     }
 
     public double getQuadratmeter() {
@@ -21,7 +22,7 @@ public class Haushaltspolizze extends Vertrag{
 
     @Override
     public double berechnePreis() {
-        return (quadratmeter/100) * (getSumme()/1000);
+        return (this.quadratmeter/100) * (getSumme()/1000);
     }
 
     @Override

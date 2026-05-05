@@ -29,13 +29,12 @@ public class Versicherungsmakler {
         return vertraege.size();
     }
 
-    public boolean hinzufuegen(Vertrag vertrag) throws VersicherungException {
-        if (vertrag != null && vertraege.contains(vertrag)) {
-            vertraege.add(vertrag);
-        } else {
+    public void hinzufuegen(Vertrag vertrag) throws VersicherungException {
+        if (vertrag == null || vertraege.contains(vertrag)) {
             throw new VersicherungException("Fehler: Vertrag kann nicht hinzugefügt werden (ungültig oder schon vorhanden)");
+        } else {
+            vertraege.add(vertrag);
         }
-        return false;
     }
 
     public double berechneGesamtPreis() {

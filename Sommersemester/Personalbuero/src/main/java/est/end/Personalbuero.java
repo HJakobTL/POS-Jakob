@@ -1,9 +1,6 @@
 package est.end;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.time.Year;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -61,7 +58,7 @@ public class Personalbuero{
         int count = 0;
 
         /* ConcurrentModification Exception - SO NICHT
-        for(Mitarbeiter ma : employees) {  // SO NICHT
+        for(Mitarbeiter ma : employees) {// SO NICHT
             if (ma.getName().equals(name)) {
                 employees.remove(ma);
                 count++;
@@ -241,7 +238,7 @@ public class Personalbuero{
     }
 
     public void save() throws PersonalException {
-        String filepath = "src/main/java/resources/person.ser";
+        String filepath = "src/main/java/resources/person.csv";
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
 
             oos.writeObject(employees);
@@ -251,6 +248,24 @@ public class Personalbuero{
         } catch (IOException e) {
             throw new PersonalException(e.getMessage());
         }
+    }
+
+    public void writePersonalToCSV() throws PersonalException {
+        String filepath = "src/main/java/resources/person.csv";
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))) {
+            bw.write(this.toCSVString());
+        } catch (IOException e) {
+            throw new PersonalException("Datei Fehler bei Write PerosnalToCSV: " + e.getMessage());
+        }
+    }
+
+    public String toCSVString() throws PersonalException {
+        final StringBuilder sb = new StringBuilder();
+
+        for (Mitarbeiter m : employees) {
+            sb.append(m.toCSVString()).append("\n");
+        }
+        return sb.toString();
     }
 
     @Override
@@ -264,5 +279,39 @@ public class Personalbuero{
             sb.append("keine Mitarbeiter vorhanden");
         }
         return sb.toString();
+    }
+
+    public void readPersonalFromCSV() throws PersonalException {
+        String filepath = "src/main/java/resources/person.csv";
+        try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line = br.readLine();
+
+            Mitarbeiter ma = null;
+            while (line != null && !line.isBlank()) {
+                if (line.trim().startsWith("Angestellter")) {
+                    //System.out.println(new Angestellter(line));
+                    ma = new Angestellter(line);
+                } else {
+                    if (line.trim().startsWith("Arzt")) {
+                        //System.out.println(new Arzt(line));
+                        ma = new Arzt(line);
+                    } else {
+                        if (line.trim().startsWith("Freelancer")) {
+                            //System.out.println(new Freelancer(line));
+                            ma = new Freelancer(line);
+                        } else System.out.println("Mitarbeitertype nicht bekannt");
+                    }
+                }
+                aufnehmen(ma);
+                line = br.readLine();
+            }
+
+
+
+        } catch (FileNotFoundException e) {
+            throw new PersonalException("Fehler mit Datei: " + e.getMessage());
+        } catch (IOException e) {
+            throw new PersonalException("Fehler mit I/O: " + e.getMessage());
+        }
     }
 }

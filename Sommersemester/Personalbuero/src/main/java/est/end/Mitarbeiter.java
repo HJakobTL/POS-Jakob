@@ -1,5 +1,6 @@
 package est.end;
 
+import java.time.DateTimeException;
 import java.time.Year;
 
 public abstract class Mitarbeiter implements Comparable<Mitarbeiter>{
@@ -12,6 +13,25 @@ public abstract class Mitarbeiter implements Comparable<Mitarbeiter>{
         setName(name);
         setGebJahr(gebJahr);
         setEintrJahr(eintrJahr);
+    }
+
+    public Mitarbeiter(String line) throws PersonalException {
+        if (line == null || line.isBlank()) throw new PersonalException("Fehler bei Mitarbeiter, line ist ungülltig" + line);
+        String[] token = line.trim().split(";");
+        if (token.length >= 4 && token.length <= 6) {
+            try {
+                setName(token[1].trim());
+
+                Year neuGebJahr;
+                neuGebJahr = Year.parse(token[2].trim());
+                setGebJahr(neuGebJahr);
+
+                setEintrJahr(Year.parse(token[3].trim()));
+            } catch (DateTimeException e) {
+                throw new PersonalException("Jahreszahl ungültig " + line);
+            }
+
+        } else throw new PersonalException("Error");
     }
 
     public String getName() {
@@ -108,6 +128,14 @@ public abstract class Mitarbeiter implements Comparable<Mitarbeiter>{
 //        } else {
 //
 //        }
+    }
+
+    public String toCSVString() throws PersonalException {
+        String delimiter = ";";
+        return getClass().getSimpleName() + delimiter +
+                name + delimiter +
+                gebJahr + delimiter +
+                eintrJahr;
     }
 
     @Override

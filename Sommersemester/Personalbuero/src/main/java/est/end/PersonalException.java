@@ -1,6 +1,6 @@
 package est.end;
 
-public class PersonalException extends RuntimeException {
+public class PersonalException extends Exception {
   public PersonalException(String message) {
     super(message);
   }

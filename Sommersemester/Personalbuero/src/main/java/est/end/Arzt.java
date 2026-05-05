@@ -13,6 +13,22 @@ public class Arzt extends Mitarbeiter{
         setFixum(fixum);
     }
 
+    public Arzt(String line) throws PersonalException {
+        super(line);
+        if (line != null && !line.isBlank()) {
+            String[] token = line.trim().split(";");
+            if (token.length == 6) {
+                try {
+                    setWochenStunden(Integer.parseInt(token[4].trim()));
+                    setFixum(Double.parseDouble(token[5].trim()));
+                } catch (NumberFormatException e) {
+                    throw new PersonalException("Fehler bei Arzt mit line: Stunden/Fixum ungueltig" + line);
+                }
+            } else throw new PersonalException("Fehler bei Arzt, line ist ungueltig" + line);
+        }
+
+    }
+
     public int getWochenStunden() {
         return wochenStunden;
     }
@@ -61,6 +77,13 @@ public class Arzt extends Mitarbeiter{
         result = 31 * result + wochenStunden;
         result = 31 * result + Double.hashCode(fixum);
         return result;
+    }
+
+    public String toCSVString() throws PersonalException {
+        String delimiter = ";";
+        return super.toCSVString() + delimiter +
+                wochenStunden + delimiter +
+                fixum;
     }
 
     @Override

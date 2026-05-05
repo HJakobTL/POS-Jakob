@@ -86,7 +86,7 @@ public class Main {
             personalbuero.aufnehmen(mitarbeiter16);
             System.out.println(personalbuero);
             System.out.println();
-            personalbuero.sortierenNachName();
+            //personalbuero.sortierenNachName();
             System.out.println(personalbuero);
             System.out.println();
         } catch (PersonalException e) {

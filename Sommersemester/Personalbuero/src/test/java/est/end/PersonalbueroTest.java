@@ -12,7 +12,7 @@ class PersonalbueroTest {
     private Arzt arzt;
 
     @org.junit.jupiter.api.BeforeEach
-    void setUp() {
+    void setUp() throws PersonalException {
         this.personalbuero = new Personalbuero();
         this.arzt = new Arzt("Hr.Mohamad", Year.of(2006), Year.now(), 12, 120.0);
     }
@@ -28,7 +28,7 @@ class PersonalbueroTest {
 //    }
 
     @Test
-    void testKuendigenAlle_sollFunktionieren_dreiMA_zweiHubert_returns2() {
+    void testKuendigenAlle_sollFunktionieren_dreiMA_zweiHubert_returns2() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -50,7 +50,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testKuendigenAlle_sollFunktionieren_einMA_einHubert_returns1() {
+    void testKuendigenAlle_sollFunktionieren_einMA_einHubert_returns1() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -68,13 +68,13 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testAngestellter() {
+    void testAngestellter() throws PersonalException {
         Angestellter angestellter = new Angestellter("Anna", Year.of(2001), Year.now());
         System.out.println(angestellter);
     }
 
     @Test
-    void testPersonalbuero_aufnehmenAngestellter_returnsTrue() {
+    void testPersonalbuero_aufnehmenAngestellter_returnsTrue() throws PersonalException {
         Angestellter angestellter = new Angestellter("Anna", Year.of(2001), Year.now());
         System.out.println(angestellter);
         Personalbuero personalbuero = new Personalbuero();
@@ -83,7 +83,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testPersonalbuero_aufnehmenFreelancer_returnsTrue() {
+    void testPersonalbuero_aufnehmenFreelancer_returnsTrue() throws PersonalException {
         Freelancer freelancer = new Freelancer();
         System.out.println(freelancer);
         Personalbuero personalbuero = new Personalbuero();
@@ -92,7 +92,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testAufnehmen_eineAngestellte_doppeltesAufnehmen_returnFalse() {
+    void testAufnehmen_eineAngestellte_doppeltesAufnehmen_returnFalse() throws PersonalException {
         // given
         Mitarbeiter mitarbeiter1 = new Angestellter("Anna", Year.of(2000), Year.now().minusYears(1));
         Personalbuero personalbuero = new Personalbuero();
@@ -104,7 +104,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testAufnehmen_zweiAngestellteAnna_doppeltesAufnehmen_returnFalse() {
+    void testAufnehmen_zweiAngestellteAnna_doppeltesAufnehmen_returnFalse() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
 
@@ -123,7 +123,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testBerechneGehaltFreelancer_defaultFreelancer_returns1000Komma0() {
+    void testBerechneGehaltFreelancer_defaultFreelancer_returns1000Komma0() throws PersonalException {
         // given
         Freelancer freelancer = new Freelancer();
         // when
@@ -134,7 +134,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testFreenlacerAufnehmen_defaultFreelancer_returnsTrue() {
+    void testFreenlacerAufnehmen_defaultFreelancer_returnsTrue() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter freelancer = new Freelancer();
@@ -144,7 +144,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testAufnehmen_sollNichtFunktionieren_einAngestellter_einFreelancer_doppelt_returnsFalse() {
+    void testAufnehmen_sollNichtFunktionieren_einAngestellter_einFreelancer_doppelt_returnsFalse() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -162,7 +162,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testAufnehmen_sollFunktionieren_einAngestellter_zweiFreelancer_nichtInhaltsgleichBeiFreelancerAttributen_returnsTrue() {
+    void testAufnehmen_sollFunktionieren_einAngestellter_zweiFreelancer_nichtInhaltsgleichBeiFreelancerAttributen_returnsTrue() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -181,7 +181,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testAufnehmen_sollNichtFunktionieren_einAngestellter_einFreelancer_inhaltsgleicherFreelancer_returnsFalse() {
+    void testAufnehmen_sollNichtFunktionieren_einAngestellter_einFreelancer_inhaltsgleicherFreelancer_returnsFalse() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -202,7 +202,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testGehaltsliste_sollFunktionieren_einAngestellter_zweiFreelancer_returnsTrue() {
+    void testGehaltsliste_sollFunktionieren_einAngestellter_zweiFreelancer_returnsTrue() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -219,7 +219,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testPersonalbuero_sollFunktionieren_dreiAngestellte_eineAerztin() {
+    void testPersonalbuero_sollFunktionieren_dreiAngestellte_eineAerztin() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter mitarbeiter = new Angestellter("Alfred", Year.of(2000), Year.now());
@@ -236,7 +236,7 @@ class PersonalbueroTest {
     }
 
     @Test
-    void testSortierenNachName_einAngestellterHubert_einFreelancerAnna_sollFunktionieren_returnTrue() {
+    void testSortierenNachName_einAngestellterHubert_einFreelancerAnna_sollFunktionieren_returnTrue() throws PersonalException {
         // given
         Personalbuero personalbuero = new Personalbuero();
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
@@ -265,7 +265,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testArztGettersSetters_sollNichtFunktionieren_throwsException() {
+    void testArztGettersSetters_sollNichtFunktionieren_throwsException() throws PersonalException {
         System.out.println(arzt);
         System.out.println();
         assertEquals(12.0, arzt.getWochenStunden());
@@ -296,7 +296,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testZaehleAngestellte_sollFunktionieren_zweiAngestellteEinArzt_returns2() {
+    void testZaehleAngestellte_sollFunktionieren_zweiAngestellteEinArzt_returns2() throws PersonalException {
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
         Mitarbeiter ma2 = new Angestellter("Anna", Year.of(2001), Year.now());
         personalbuero.aufnehmen(ma1);
@@ -314,7 +314,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testBerechneDurchschnittsalter_sollFunktionieren_zweiAngestellteEinArzt_returns23Komma666() {
+    void testBerechneDurchschnittsalter_sollFunktionieren_zweiAngestellteEinArzt_returns23Komma666() throws PersonalException {
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
         Mitarbeiter ma2 = new Angestellter("Anna", Year.of(2001), Year.now());
         personalbuero.aufnehmen(ma1);
@@ -328,14 +328,14 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testZaehleAlter_sollNichtFunktionieren_leeresPersonalbuero_returnsMinus99() {
+    void testZaehleAlter_sollNichtFunktionieren_leeresPersonalbuero_returnsMinus99() throws PersonalException {
         assertEquals(0, personalbuero.zaehleMitarbeiter());
         assertEquals(-99, personalbuero.zaehleAlter(19));
     }
 
     // NEU
     @Test
-    void testZaehleAlter_sollFunktionieren_zweiAngestellteEinArzt20_returns1() {
+    void testZaehleAlter_sollFunktionieren_zweiAngestellteEinArzt20_returns1() throws PersonalException {
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
         Mitarbeiter ma2 = new Angestellter("Anna", Year.of(2001), Year.now());
         personalbuero.aufnehmen(ma1);
@@ -349,7 +349,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testZaehleAlter_sollFunktionieren_zweiAngestellteEinArztKeine19_returns0() {
+    void testZaehleAlter_sollFunktionieren_zweiAngestellteEinArztKeine19_returns0() throws PersonalException {
         Mitarbeiter ma1 = new Angestellter("Hubert", Year.of(2000), Year.now());
         Mitarbeiter ma2 = new Angestellter("Anna", Year.of(2001), Year.now());
         personalbuero.aufnehmen(ma1);
@@ -363,7 +363,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testKuendigenDouble_sollNichtFunktionieren_leeresPersonalbuero_throwsException() {
+    void testKuendigenDouble_sollNichtFunktionieren_leeresPersonalbuero_throwsException() throws PersonalException {
         try{
             personalbuero.kuendigenGeld(0.0);
             fail();
@@ -374,7 +374,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testKuendigenDouble_sollFunktionieren_einFreelacer_returnsGehalt() {
+    void testKuendigenDouble_sollFunktionieren_einFreelacer_returnsGehalt() throws PersonalException {
         Freelancer freelancer = new Freelancer();
         assertTrue(personalbuero.aufnehmen(freelancer));
         double gehalt = freelancer.berechneGehalt();
@@ -389,7 +389,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testKuendigenIndex_sollNichtFunktionieren_leeresPersonalbuero_throwsException() {
+    void testKuendigenIndex_sollNichtFunktionieren_leeresPersonalbuero_throwsException() throws PersonalException {
         try{
             personalbuero.kuendigen(-1);
             fail();
@@ -400,7 +400,7 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testKuendigenIndex_sollFunktionieren_einFreelacer_returnsFreelacer() {
+    void testKuendigenIndex_sollFunktionieren_einFreelacer_returnsFreelacer() throws PersonalException {
         Mitarbeiter mitarbeiter = new Freelancer();
         assertTrue(personalbuero.aufnehmen(mitarbeiter));
         try{
@@ -414,20 +414,20 @@ class PersonalbueroTest {
 
     // NEU
     @Test
-    void testKuendigenString_sollNichtFunktionieren_leeresPersonalbuero_returnsFalse() {
+    void testKuendigenString_sollNichtFunktionieren_leeresPersonalbuero_returnsFalse() throws PersonalException {
         assertFalse(personalbuero.kuendigen("Anna"));
     }
 
     // NEU
     @Test
-    void testKuendigenMitarbeiter_sollNichtFunktionieren_leeresPersonalbuero_returnsFalse() {
+    void testKuendigenMitarbeiter_sollNichtFunktionieren_leeresPersonalbuero_returnsFalse() throws PersonalException {
         Mitarbeiter mitarbeiter = new Freelancer();
         assertFalse(personalbuero.kuendigen(mitarbeiter));
     }
 
 //    // NEU TODO
    @Test
-    void testKuendigenString_sollNichtFunktionieren_null_throwsException() {
+    void testKuendigenString_sollNichtFunktionieren_null_throwsException() throws PersonalException {
         try{
             assertFalse(personalbuero.kuendigen((String)(null)));
             fail();
@@ -438,12 +438,62 @@ class PersonalbueroTest {
 
     // NEU TODO
     @Test
-    void testKuendigenMitarbeiter_sollNichtFunktionieren_null_throwsException() {
+    void testKuendigenMitarbeiter_sollNichtFunktionieren_null_throwsException() throws PersonalException {
         try{
             assertFalse(personalbuero.kuendigen((Mitarbeiter) null));
             fail();
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    @Test
+    void testToCSVString() {
+        try {
+            Mitarbeiter m1 = new Angestellter("Hubert", Year.of(2000), Year.now());
+            Mitarbeiter m2 = new Arzt("Hubert",Year.of(2000),Year.now(),10,1000);
+            Mitarbeiter m3 = new Freelancer("Hubert",Year.of(2000),Year.now(),100,10);
+            Personalbuero p1 = new Personalbuero();
+            p1.aufnehmen(m1);
+            p1.aufnehmen(m2);
+            p1.aufnehmen(m3);
+            System.out.println(m1.toCSVString());
+            System.out.println(m2.toCSVString());
+            System.out.println(m3.toCSVString());
+            System.out.println();
+            System.out.println(p1.toCSVString());
+            p1.writePersonalToCSV();
+            System.out.println("Daten wurden gespeichert");
+        } catch (PersonalException p) {
+            fail();
+        }
+
+    }
+
+    @Test
+    void testReadPersonalFromCSV() throws PersonalException {
+        try {
+            Personalbuero p1 = new Personalbuero();
+            Mitarbeiter m1 = new Angestellter("Test1",Year.of(2000),Year.now());
+            Mitarbeiter m2 = new Arzt("Test2",Year.of(2000),Year.now(),10,1000);
+            Mitarbeiter m3 = new Freelancer("Test3",Year.of(2000),Year.now(),1000,10);
+
+
+            System.out.println(p1); // leer
+            System.out.println();
+
+            p1.aufnehmen(m1);
+            p1.aufnehmen(m2);
+            p1.aufnehmen(m3);
+
+            p1.writePersonalToCSV();
+
+            p1.readPersonalFromCSV();
+            System.out.println(p1);
+            System.out.println();
+        } catch (PersonalException e) {
+            System.out.println(e.getMessage());
+            fail();
         }
     }
 }
